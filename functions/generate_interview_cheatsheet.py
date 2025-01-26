@@ -1,17 +1,20 @@
+import os
+
 from openai import OpenAI
 
 from functions.pdf_to_text import extract_text_from_pdf
 from functions.response_format import response_format
 from functions.get_yt_videos import replace_youtube_videos_with_links
-from config import YTAPIKEY, AIMLAPIKEY
+from dotenv import load_dotenv
 
 
 def generate_interview_cheatsheet(resume_path,job_description):
+    load_dotenv()
     try:
         resume_text = extract_text_from_pdf(resume_path)
 
         base_url = "https://api.aimlapi.com/v1"
-        api_key = AIMLAPIKEY
+        api_key = os.getenv("AIMLAPIKEY")
         api = OpenAI(api_key=api_key, base_url=base_url)
         # Specify the desired response format in JSON schema
 
@@ -39,7 +42,7 @@ def generate_interview_cheatsheet(resume_path,job_description):
         #     print("hi")
         #     print(message.content)
 
-        return replace_youtube_videos_with_links(message.content,api_key=YTAPIKEY)
+        return replace_youtube_videos_with_links(message.content,api_key=os.getenv("YTAPIKEY"))
 
     except Exception as e:
         print(f"Error during summarization: {e}")
