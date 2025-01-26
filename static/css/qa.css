@@ -1,0 +1,36 @@
+#qa-section {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#qa-section .question-answer {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+#qa-section .question {
+    font-weight: bold;
+    cursor: pointer; /* Hand icon on hover */
+}
+
+#qa-section .answer {
+    display: none; /* Ensure answers are collapsed by default */
+    margin-top: 10px;
+    color: #333;
+}
+
+#qa-section .question-answer .question:hover {
+    color: #007bff; /* Change color on hover */
+}
+
+/* Collapsible functionality */
+#qa-section .question-answer.active .answer {
+    display: block;
+}
+
+/* Horizontal divider line (optional, if you need it) */
+#qa-section hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}

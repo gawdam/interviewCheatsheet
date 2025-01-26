@@ -1,0 +1,38 @@
+<section id="skills-section"  onclick="toggleVisibility('skills-table')" >
+    <h2>Required Skills</h2>
+    <div id="skills-div"><table id="skills-table">
+        <thead>
+            <tr>
+                <th>Skill</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for skill in cheatsheet.requiredskills %}
+            <tr>
+                <td><strong>{{ skill.skill }}</strong></td>
+                <td class="status-column">
+                    {% if skill.candidate_skill %}
+                        <span class="green">✓</span>
+                    {% else %}
+                        <span class="red">✗</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        </div>
+</section>
+
+<script>
+    function toggleVisibility(elementId) {
+        const element = document.getElementById(elementId);
+        // Toggle the visibility of the container
+        if (element.style.display === "none") {
+            element.style.display = "block"; // Show the container
+        } else {
+            element.style.display = "none"; // Hide the container
+        }
+    }
+</script>

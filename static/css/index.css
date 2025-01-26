@@ -1,0 +1,410 @@
+body {
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+.upload-box {
+  border: 2px dashed #333333;
+  border-radius: 10px;
+  width: 350px;
+  height: 200px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #FFFFFF;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.upload-box.dragover {
+  background-color: #E2E2E2;
+  border-color: #007BFF;
+  box-shadow: 0 4px 8px rgba(123, 123, 123, 0.2);
+}
+
+.upload-box img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.upload-box p {
+  margin: 0;
+  color: #333333;
+  font-weight: bold;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.messages {
+  color: red;
+  margin-bottom: 20px;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.preview-hidden {
+  display: none;
+}
+
+body {
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+.upload-box {
+  border: 2px dashed #333333;
+  border-radius: 10px;
+  width: 350px;
+  height: 200px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #FFFFFF;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.upload-box.dragover {
+  background-color: #E2E2E2;
+  border-color: #007BFF;
+  box-shadow: 0 4px 8px rgba(123, 123, 123, 0.2);
+}
+
+.upload-box img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.upload-box p {
+  margin: 0;
+  color: #333333;
+  font-weight: bold;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.messages {
+  color: red;
+  margin-bottom: 20px;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.preview-hidden {
+  display: none;
+}
+
+.original-button {
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  text-decoration: none;
+  color: #303030;
+  font-size: 18px;
+  border-radius: 0px;
+  width: 200px;
+  height: 40px;
+  font-weight: bold;
+  border: 2px solid #333333;
+  transition: 0.3s;
+  box-shadow: 5px 5px 0px 0px rgba(51, 51, 51, 1);
+  background-color: #ffffff;
+}
+
+.original-button:hover {
+  box-shadow: 0 0 #333;
+  color: #fff;
+  background-color: #333;
+}
+
+
+
+.container {
+  display: flex;
+}
+
+.upload-section {
+  flex: 1;
+  /* No need for margin-right */
+}
+
+.job-description-section {
+  flex: 1;
+}
+
+.pdf-instruction p{
+  font-size: 10px;
+  color: #999999; /* Gray color */
+}
+
+.divider {
+  width: 2px; /* Adjust divider width as needed */
+  height: 200px; /* Adjust divider height to match upload box */
+  background-color: #ccc;
+  margin: 0 30px; /* Add some spacing around the divider */
+}
+
+textarea {
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  width: 350px;
+  height: 180px;
+  padding: 10px;
+  font-size:14px;
+
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+/* Styling for the description section */
+/* Center the description text */
+.description {
+    width: 60%;
+    margin: 0 auto; /* Centers the description block */
+    font-size: 18pax;
+    line-height: 1.6;
+    color: #333;
+    text-align: center; /* Centers the text */
+}
+
+.flash-message {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+    background-color: #f44336; /* Red for error messages */
+    color: white;
+    border-radius: 5px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeInOut 4s forwards;
+}
+
+/* Animation for fading out the flash message */
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+
+/* Styling for the main header */
+h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.upload-box.dragging {
+    border: 2px dashed #4caf50; /* Change border style when file is dragged over */
+    background-color: #f1f1f1;
+}
+
+/* Style for loading screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;  /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: white;
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+
+
+
+
+.container {
+  display: flex;
+}
+
+.upload-section {
+  flex: 1;
+  /* No need for margin-right */
+}
+
+.job-description-section {
+  flex: 1;
+}
+
+.pdf-instruction p{
+  font-size: 10px;
+  color: #999999; /* Gray color */
+}
+
+.divider {
+  width: 2px; /* Adjust divider width as needed */
+  height: 200px; /* Adjust divider height to match upload box */
+  background-color: #ccc;
+  margin: 0 30px; /* Add some spacing around the divider */
+}
+
+textarea {
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  width: 350px;
+  height: 180px;
+  padding: 10px;
+  font-size:14px;
+
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+/* Styling for the description section */
+/* Center the description text */
+.description {
+    width: 60%;
+    margin: 0 auto; /* Centers the description block */
+    font-size: 18pax;
+    line-height: 1.6;
+    color: #333;
+    text-align: center; /* Centers the text */
+}
+
+.flash-message {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+    background-color: #f44336; /* Red for error messages */
+    color: white;
+    border-radius: 5px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeInOut 4s forwards;
+}
+
+/* Animation for fading out the flash message */
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+
+/* Styling for the main header */
+h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.upload-box.dragging {
+    border: 2px dashed #4caf50; /* Change border style when file is dragged over */
+    background-color: #f1f1f1;
+}
+
+/* Style for loading screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;  /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: white;
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+

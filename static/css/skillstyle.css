@@ -1,0 +1,65 @@
+/* Styles for skills table */
+#skills-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#skills-table {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    width: 50%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    align-items: center;
+    justify-content: center;
+}
+
+#skills-table th, #skills-table td {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+#skills-table th {
+
+    background-color: #000000;
+    color: white;
+}
+
+#skills-table td {
+
+    background-color: #f9f9f9;
+}
+
+#skills-table tr:nth-child(even) td {
+
+    background-color: #f2f2f2;
+}
+
+.status-column {
+
+    text-align: center;
+    font-weight: bold;
+}
+
+.status-column:empty {
+
+    color: #ccc;
+}
+
+/* Smooth transition for hiding/showing the skills section */
+#skills-section {
+    transition: all 0.3s ease;
+    display: block;
+}
+
+/* Ensuring the skills section hides completely when collapsed */
+#skills-section.collapsed {
+    display: none;
+}
+

@@ -1,0 +1,103 @@
+body {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    background-color: #f4f7fa;
+    color: #333;
+}
+
+h1, h2 {
+    color: #333;
+}
+.header {
+    text-align: center;
+    margin-bottom: 20px; /* Add some space below the header */
+}
+
+#smallerheader{
+    font-size:22px; /* Add some space below the header */
+}
+
+
+
+section {
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+h3 {
+    color: #444;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#concepts-revision, #swot-analysis, #required-skills, #qa-section, #company-insights {
+    margin-top: 20px;
+}
+
+/* Basic styling for collapsible sections */
+.collapsible-section {
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.collapsible-header {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.collapsible-header h2 {
+    margin: 0;
+    font-size: 18px;
+    flex-grow: 1;
+}
+
+.toggle-button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease-in-out;
+}
+
+.toggle-button.collapsed {
+    transform: rotate(-90deg);
+}
+
+.collapsible-content {
+    padding: 15px;
+    display: none;
+}
+
+.container {
+width: 60%;
+margin: 0 auto; /* Center the container horizontally */
+}

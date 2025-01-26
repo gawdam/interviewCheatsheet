@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Cheatsheet</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="static/css/swot.css">
+</head>
+<body>
+    <section id="swot-section" class="swot-analysis">
+        <h2 class="swot-header">
+            SWOT Analysis
+        </h2>
+        <div id="swot-grid" class="container2">
+            <div class="box strengths">
+                <h3>
+                    <i class="fa fa-check-circle"></i> Strengths
+                </h3>
+                <ul>
+                    {% for strength in cheatsheet.swot_analysis.strengths %}
+                        <li>• {{ strength }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="box weaknesses">
+                <h3>
+                    <i class="fa fa-times-circle"></i> Weaknesses
+                </h3>
+                <ul>
+                    {% for weakness in cheatsheet.swot_analysis.weaknesses %}
+                        <li>• {{ weakness }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="box opportunities">
+                <h3>
+                    <i class="fa fa-lightbulb"></i> Opportunities
+                </h3>
+                <ul>
+                    {% for opportunity in cheatsheet.swot_analysis.opportunities %}
+                        <li>• {{ opportunity }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="box threats">
+                <h3>
+                    <i class="fa fa-exclamation-circle"></i> Threats
+                </h3>
+                <ul>
+                    {% for threat in cheatsheet.swot_analysis.threats %}
+                        <li>• {{ threat }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+
+</body>
+

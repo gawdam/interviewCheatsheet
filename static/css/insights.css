@@ -1,0 +1,49 @@
+/* Styles for the insights section */
+#insights-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Styles for the insights table */
+#insights-table {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    width: 70%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    align-items: center;
+    justify-content: center;
+}
+
+#insights-table th, #insights-table td {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+#insights-table th {
+    background-color: #000000;
+    color: white;
+}
+
+#insights-table td {
+    background-color: #f9f9f9;
+}
+
+#insights-table tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+
+/* Status column for empty cells (if applicable) */
+.status-column {
+    text-align: center;
+    font-weight: bold;
+}
+
+.status-column:empty {
+    color: #ccc;
+}

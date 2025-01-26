@@ -1,0 +1,19 @@
+<section >
+    <h2 onclick="toggleVisibility('insights-section')">Company Insights</h2>
+    <div id="insights-section"><table id="insights-table">
+        <thead>
+            <tr>
+                <th>Information Type</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for insight in cheatsheet.company_insights %}
+            <tr>
+                <td><strong>{{ insight.information_type }}</strong></td>
+                <td>{{ insight.info }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table></div>
+</section>

@@ -1,0 +1,50 @@
+<section id="concepts-section" >
+    <h2 onclick="toggleVisibility('concepts-header')">Concepts for Revision</h2>
+    <div id="concepts-header">
+
+
+    {% for concept in cheatsheet.concepts_revision %}
+    <div id="concept-{{ loop.index }}" class="concept">
+        <h3 onclick="toggleVisibility('concepts-div-{{loop.index}}')">{{ concept.topic }}</h3>
+        <div id="concepts-div-{{loop.index}}">
+            <p>{{ concept.brief }}</p>
+
+        <!-- Embed YouTube video -->
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/{{concept.youtube_video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <ul>
+            <h4>Interview Questions</h4>
+            {% for question in concept.interview_questions %}
+            <li class="question-answer">
+                <div class="question">
+                    <strong>Q:</strong> {{ question.question }}
+                </div>
+                <div class="answer">
+                    <em>A:</em> {{ question.answer }}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+        </div>
+        <!-- Horizontal divider line -->
+        <hr>
+    </div>
+    {% endfor %}
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const questions = document.querySelectorAll('.question');
+
+        questions.forEach(question => {
+            question.addEventListener('click', function () {
+                const parent = this.closest('.question-answer');
+                parent.classList.toggle('active');
+            });
+        });
+    });
+</script>
+
+</section>

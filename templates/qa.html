@@ -1,0 +1,24 @@
+<section id="qa-section">
+    <h2 onclick="toggleVisibility('qa-list')">Candidate projects Q&A </h2>
+    <ul id="qa-list">
+        {% for qa in cheatsheet.QA %}
+        <li class="question-answer">
+            <div class="question">
+                <strong>Q:</strong> {{ qa.question }}
+            </div>
+            <div class="answer">
+                <em>A:</em> {{ qa.answer }}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+
+<script>
+    document.querySelectorAll('.qa-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            answer.style.display = (answer.style.display === 'none' || answer.style.display === '') ? 'block' : 'none';
+        });
+    });
+</script>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Your Resume</title>
+    <link rel="stylesheet" href="static/css/index.css">
+</head>
+<body>
+    <h1>Interview Cheatsheet</h1>
+
+    <!-- Description of Interview Cheatsheet -->
+    <div class="description">
+        <p>
+            Add your resume, job description, let LLM sprinkle in some magic, and voila - you get a cheatsheet to prepare for your next interview :D
+        </p>
+        <p>
+            Good luck!
+        </p>
+
+
+    </div>
+
+    <br><br>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-message">
+                <p>{{ messages[0] }}</p>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="container">
+        <div class="upload-section">
+            <div class="upload-box"
+                 onclick="handleBoxClick()"
+                 ondragover="handleDragOver(event)"
+                 ondragleave="handleDragLeave()"
+                 ondrop="handleDrop(event)">
+                <img src="static/images/upload.png" alt="Upload Icon">
+                <p>Upload Resume</p>
+                <div class="pdf-instruction">
+                    <p>Only PDF format allowed. </p>
+                    <p>Drag and drop not working </p>
+                </div>
+                <iframe id="pdf-preview" class="preview-hidden"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    <!-- Form now contains both the file input and job description textarea -->
+    <form action="/upload" method="POST" enctype="multipart/form-data" id="upload-form">
+        <textarea id="jobDescription" name="jobDescription" placeholder="Paste the job description here"></textarea>
+        <input id="file-input" class="hidden-input" type="file" name="file" accept="application/pdf" onchange="handleFileInput(event)">
+        <br><br>
+        <button type="submit" class="original-button">Submit</button>
+    </form>
+
+    <!-- Loading screen -->
+    <div id="loading-screen" class="loading-screen">
+        <p>Processing... Please wait.</p>
+        <div class="loader"></div>
+    </div>
+
+    <script src="static/js/script.js"></script>
+</body>
+</html>

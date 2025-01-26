@@ -1,0 +1,81 @@
+/* Styling for Concepts Section */
+#concepts-section {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    margin-top: 20px;
+    padding: 20px;
+
+}
+
+/* Styling for each concept */
+#concepts-section #concept-{{ loop.index }} {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+}
+
+/* Increase the size of the h3 */
+#concepts-section h3 {
+    font-size: 24px;
+    color: #333;
+    text-decoration: underline;
+    text-decoration-thickness: 2px; /* Set thickness */
+}
+
+
+/* YouTube video embed */
+#concepts-section .video-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+#concepts-section .video-container iframe {
+    width: 80%;
+    height: 400px;
+    border: none;
+}
+
+/* Interview Questions styling */
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+h3 {
+    font-size: 16px;
+}
+
+ul h4 {
+    font-size: 1.2em;
+    margin-top: 10px;
+    color: #555;
+}
+
+.question-answer {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.question {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.answer {
+    display: none;
+    margin-top: 10px;
+    color: #333;
+}
+
+/* Horizontal divider line */
+hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+/* Collapsible functionality */
+.question-answer .question:hover {
+    color: #007bff;
+}
+
+.question-answer.active .answer {
+    display: block;
+}
