@@ -8,6 +8,7 @@ from functions.get_yt_videos import replace_youtube_videos_with_links
 from dotenv import load_dotenv
 
 
+
 def generate_interview_cheatsheet(resume_path,job_description):
     load_dotenv()
     try:
@@ -33,6 +34,8 @@ def generate_interview_cheatsheet(resume_path,job_description):
             response_format={"type": "json_schema", "json_schema": response_format}
             # response_format =
         )
+# Error reading the uploaded file: 'str object' has no attribute 'swot_analysis'
+
 
         # Parse the response
         message = response.choices[0].message
@@ -41,8 +44,9 @@ def generate_interview_cheatsheet(resume_path,job_description):
         # else:
         #     print("hi")
         #     print(message.content)
+        json_with_yt_link = replace_youtube_videos_with_links(message.content, api_key=os.getenv("YTAPIKEY"))
 
-        return replace_youtube_videos_with_links(message.content,api_key=os.getenv("YTAPIKEY"))
+        return json_with_yt_link
 
     except Exception as e:
         print(f"Error during summarization: {e}")
