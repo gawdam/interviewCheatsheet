@@ -3,7 +3,6 @@ from openai import OpenAI
 from functions.pdf_to_text import extract_text_from_pdf
 from functions.response_format import response_format
 from functions.get_yt_videos import replace_youtube_videos_with_links
-from config import YTAPIKEY, AIMLAPIKEY
 
 
 def generate_interview_cheatsheet(resume_path,job_description):
