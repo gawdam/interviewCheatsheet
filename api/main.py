@@ -70,12 +70,6 @@ def upload_file():
 def favicon():
     return app.send_static_file('favicon.png')
 
-# WSGI handler for Vercel
-def handler(environ, start_response):
-    """WSGI handler for Vercel."""
-    request = Request(environ)
-    response = Response.from_app(app, environ, start_response)
-    return response(environ, start_response)
 
 if __name__ == '__main__':
     app.run()
