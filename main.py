@@ -28,7 +28,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/tmp', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         # Check if the post request has the file part
