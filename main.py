@@ -3,6 +3,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import os
 
 from functions.generate_interview_cheatsheet import generate_interview_cheatsheet
+from test import sample_json
+
 
 # Initialize the Flask app
 app = Flask(__name__)
@@ -24,7 +26,8 @@ def allowed_file(filename):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('result.html', cheatsheet=sample_json)
+    # return render_template('index.html')
 
 
 @app.route('/cheatsheet', methods=['GET', 'POST'])

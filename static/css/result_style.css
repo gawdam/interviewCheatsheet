@@ -98,6 +98,23 @@ a:hover {
 }
 
 .container {
+align: center;
 width: 60%;
 margin: 0 auto; /* Center the container horizontally */
+}
+
+.buy-me-a-coffee  a {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px; /* Adds space below the button */
+}
+
+.buy-me-a-coffee img {
+    text-align: center;
+    width: 300px; /* Increase size of the button */
+    max-width: 100%;
+
 }
