@@ -2,9 +2,10 @@ from googleapiclient.discovery import build
 
 
 def replace_youtube_videos_with_links(json_data, api_key):
+    json_data_changed = json_data
     youtube = build("youtube", "v3", developerKey=api_key)
 
-    for concept in json_data.get("concepts_revision", []):
+    for concept in json_data_changed.get("concepts_revision", []):
         search_term = concept.get("youtube_video")
         if search_term:
             try:
@@ -30,4 +31,4 @@ def replace_youtube_videos_with_links(json_data, api_key):
                 # Handle API errors gracefully
                 concept["youtube_video"] = f"Error fetching video: {str(e)}"
 
-    return json_data
+    return json_data_changed

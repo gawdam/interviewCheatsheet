@@ -46,7 +46,7 @@ def generate_interview_cheatsheet(resume, job_description):
         print(type(parsed_content))
         # Replace YouTube videos with links
         json_with_yt_link = replace_youtube_videos_with_links(parsed_content, api_key=os.getenv("YTAPIKEY"))
-
+        print(json_with_yt_link)
         return json_with_yt_link
 
     except Exception as e:
