@@ -6,11 +6,11 @@ from functions.response_format import response_format
 from functions.get_yt_videos import replace_youtube_videos_with_links
 from dotenv import load_dotenv
 
-def generate_interview_cheatsheet(resume_path, job_description):
+def generate_interview_cheatsheet(resume, job_description):
     load_dotenv()
     try:
         # Extract resume text
-        resume_text = extract_text_from_pdf(resume_path)
+        resume_text = extract_text_from_pdf(resume)
 
         # Initialize OpenAI API
         base_url = "https://api.aimlapi.com/v1"

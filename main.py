@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 import os
 from test import sample_json
+from io import BytesIO
+
 
 from functions.generate_interview_cheatsheet import generate_interview_cheatsheet
 
@@ -45,7 +47,7 @@ def upload_file():
         try:
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
-                file_path = os.path.join(UPLOAD_FOLDER, filename)
+                file_path = os.path.join(os.path.abspath(app.config['UPLOAD_FOLDER']), filename)
                 file.save(file_path)
 
                 # Get the job description
