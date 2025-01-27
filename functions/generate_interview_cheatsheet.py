@@ -6,11 +6,17 @@ from functions.response_format import response_format
 from functions.get_yt_videos import replace_youtube_videos_with_links
 from dotenv import load_dotenv
 
+import sys
+
+
 def generate_interview_cheatsheet(resume, job_description):
     load_dotenv()
+
     try:
         # Extract resume text
         resume_text = extract_text_from_pdf(resume)
+
+
 
         # Initialize OpenAI API
         base_url = "https://api.aimlapi.com/v1"
@@ -31,11 +37,13 @@ def generate_interview_cheatsheet(resume, job_description):
 
         # Validate and parse response
         message = response.choices[0].message
+        print(message)
+
         try:
             parsed_content = json.loads(message.content)  # Ensure JSON format
         except json.JSONDecodeError:
             raise ValueError("OpenAI response is not valid JSON")
-
+        print(type(parsed_content))
         # Replace YouTube videos with links
         json_with_yt_link = replace_youtube_videos_with_links(parsed_content, api_key=os.getenv("YTAPIKEY"))
 

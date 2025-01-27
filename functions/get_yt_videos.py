@@ -1,9 +1,7 @@
 from googleapiclient.discovery import build
-import json
 
 
-def replace_youtube_videos_with_links(json_string, api_key):
-    json_data = json.loads(json_string)
+def replace_youtube_videos_with_links(json_data, api_key):
     youtube = build("youtube", "v3", developerKey=api_key)
 
     for concept in json_data.get("concepts_revision", []):

@@ -1,9 +1,9 @@
+from io import BytesIO
+
 from flask import Flask, render_template, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 import os
 from test import sample_json
-from io import BytesIO
-
 
 from functions.generate_interview_cheatsheet import generate_interview_cheatsheet
 
@@ -46,9 +46,7 @@ def upload_file():
 
         try:
             if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file_path = os.path.join(os.path.abspath(app.config['UPLOAD_FOLDER']), filename)
-                file.save(file_path)
+                file_data = BytesIO(file.read())
 
                 # Get the job description
                 job_description = request.form['jobDescription']
@@ -59,7 +57,7 @@ def upload_file():
                     return redirect('/')
 
                 # Generate the cheatsheet text
-                cheatsheet_text = generate_interview_cheatsheet(file_path, job_description)
+                cheatsheet_text = generate_interview_cheatsheet(file_data, job_description)
 
                 return render_template('result.html', cheatsheet=cheatsheet_text)
             else:
