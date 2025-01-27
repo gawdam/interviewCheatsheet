@@ -1,8 +1,9 @@
+
 {
   "version": 2,
-  "functions": {
+    "functions": {
     "main.py": {
-      "runtime": "python@3.12",
+      "runtime": "@vercel/python",
       "maxDuration": 20
     }
   },
@@ -13,4 +14,3 @@
     }
   ]
 }
-
