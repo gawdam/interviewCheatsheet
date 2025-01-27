@@ -1,9 +1,6 @@
 from io import BytesIO
-
 from flask import Flask, render_template, request, redirect, url_for, flash
-from werkzeug.utils import secure_filename
 import os
-from test import sample_json
 
 from functions.generate_interview_cheatsheet import generate_interview_cheatsheet
 
