@@ -2,7 +2,7 @@
   "version": 2,
   "functions": {
     "main.py": {
-      "runtime": "@vercel/python",
+      "runtime": "@vercel/python@4.3.0",
       "maxDuration": 20
     }
   },
