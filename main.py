@@ -26,8 +26,8 @@ def allowed_file(filename):
 
 @app.route('/')
 def index():
-    return render_template('result.html', cheatsheet=sample_json)
-    # return render_template('index.html')
+    # return render_template('result.html', cheatsheet=sample_json)
+    return render_template('index.html')
 
 
 @app.route('/cheatsheet', methods=['GET', 'POST'])
