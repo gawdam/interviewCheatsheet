@@ -70,6 +70,10 @@ def upload_file():
 
     return render_template('index.html')
 
+@app.route('/favicon.png')
+def favicon():
+    return app.send_static_file('favicon.png')
+
 
 if __name__ == '__main__':
     app.run()
