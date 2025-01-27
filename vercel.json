@@ -1,11 +1,12 @@
+
 {
   "version": 2,
-  "functions": {
-    "main.py": {
-      "runtime": "@vercel/python@4.3.0",
-      "maxDuration": 20
+  "builds": [
+    {
+      "src": "main.py",
+      "use": "@vercel/python"
     }
-  },
+  ],
   "routes": [
     {
       "src": "/(.*)",
