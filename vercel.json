@@ -1,9 +1,8 @@
-
 {
   "version": 2,
-    "functions": {
-    "main.py": {
-      "runtime": "@vercel/python",
+  "functions": {
+    "api/main.py": {
+      "runtime": "python@3.9", 
       "maxDuration": 20
     }
   },
