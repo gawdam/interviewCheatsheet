@@ -30,7 +30,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/tmp', methods=['GET', 'POST'])
+@app.route('/cheatsheet', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         # Check if the post request has the file part
