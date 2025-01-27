@@ -9,7 +9,7 @@ from functions.generate_interview_cheatsheet import generate_interview_cheatshee
 app = Flask(__name__)
 
 # Configure upload folder and allowed extensions
-UPLOAD_FOLDER = '/tmp'
+UPLOAD_FOLDER = 'tmp/'
 ALLOWED_EXTENSIONS = {'pdf'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = 'supersecretkey'
