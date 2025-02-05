@@ -1,10 +1,10 @@
 import os
 import json
-from openai import OpenAI
 from functions.pdf_to_text import extract_text_from_pdf
-from functions.response_format import response_format
+from functions.response_format import  schema
 from functions.get_yt_videos import replace_youtube_videos_with_links
 from dotenv import load_dotenv
+from google import genai
 
 import sys
 
@@ -19,31 +19,31 @@ def generate_interview_cheatsheet(resume, job_description):
 
 
         # Initialize OpenAI API
-        base_url = "https://api.aimlapi.com/v1"
-        api_key = os.getenv("AIMLAPIKEY")
-        api = OpenAI(api_key=api_key, base_url=base_url)
+        api_key = os.getenv("GEMINIAPIKEY")
+        client = genai.Client(api_key=api_key)
+
 
         # Send the prompt to OpenAI
-        response = api.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant..."},
-                {"role": "user", "content": f"Here is the resume: {resume_text}\n\n Here is the job description {job_description}. Do not include any formatting. Do not use quotes"}
-            ],
-            temperature=0.7,
-            max_tokens=8192,
-            response_format={"type": "json_schema", "json_schema": response_format}
+        response = client.models.generate_content(
+            model='gemini-1.5-flash',
+            contents=f"Create a cheatsheet for my interview. Here is the resume: {resume_text}\n\n Here is the job description {job_description}. Do not include any formatting. Do not use quotes",
+            config={
+                'max_output_tokens': 5000,
+                'temperature' : 0.1,
+                'response_mime_type': 'application/json',
+                'response_schema': schema,
+
+            },
         )
 
         # Validate and parse response
-        message = response.choices[0].message
+        message = response.text
         print(message)
 
         try:
-            parsed_content = json.loads(message.content)  # Ensure JSON format
+            parsed_content = json.loads(message)  # Ensure JSON format
         except json.JSONDecodeError:
             raise ValueError("OpenAI response is not valid JSON")
-        print(type(parsed_content))
         # Replace YouTube videos with links
         json_with_yt_link = replace_youtube_videos_with_links(parsed_content, api_key=os.getenv("YTAPIKEY"))
         print(json_with_yt_link)
