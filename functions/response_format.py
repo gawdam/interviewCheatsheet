@@ -62,9 +62,9 @@ schema = {
                         "type": "string",
                         "description": "An introduction about what the topic is, why it's relevant to the role, and how the candidate can prepare for it"
                     },
-                    "youtube_video": {
+                    "yt_search_query": {
                         "type": "string",
-                        "description": "Title of a YouTube video that summarizes this topic"
+                        "description": "Youtube search query to get videos to learn about this topic"
                     },
                     "interview_questions": {
                         "type": "array",
@@ -85,7 +85,7 @@ schema = {
                         }
                     }
                 },
-                "required": ["topic", "brief", "youtube_video", "interview_questions"]
+                "required": ["topic", "brief", "yt_search_query", "interview_questions"]
             }
         },
         "QA": {
