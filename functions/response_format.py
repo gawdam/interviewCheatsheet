@@ -15,22 +15,22 @@ schema = {
             "properties": {
                 "strengths": {
                     "type": "array",
-                    "description": "Key strengths of the candidate for the role",
+                    "description": "Key strengths of the candidate in this job interview",
                     "items": {"type": "string"}
                 },
                 "weaknesses": {
                     "type": "array",
-                    "description": "Key weaknesses of the candidate for this role",
+                    "description": "Key weaknesses of the candidate in this job interview",
                     "items": {"type": "string"}
                 },
                 "opportunities": {
                     "type": "array",
-                    "description": "Key opportunities for the candidate in this role",
+                    "description": "Key opportunities that may come up for the candidate in this job role",
                     "items": {"type": "string"}
                 },
                 "threats": {
                     "type": "array",
-                    "description": "Key threats for the candidate in this role",
+                    "description": "Key threats that may come up for the candidate in this job role",
                     "items": {"type": "string"}
                 }
             },
