@@ -53,7 +53,7 @@
     <br><br>
 
     <!-- Form now contains both the file input and job description textarea -->
-    <form action="/cheatsheet" method="POST" enctype="multipart/form-data" id="upload-form">
+    <form action="/submit" method="POST" enctype="multipart/form-data" id="upload-form">
         <textarea id="jobDescription" name="jobDescription" placeholder="Paste the job description here"></textarea>
         <input id="file-input" class="hidden-input" type="file" name="file" accept="application/pdf" onchange="handleFileInput(event)">
         <br><br>

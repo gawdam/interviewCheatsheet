@@ -7,34 +7,52 @@
     <link rel="stylesheet" href="static/css/qa.css">
     <link rel="stylesheet" href="static/css/insights.css">
     <link rel="stylesheet" href="static/css/result_style.css">
-
+    <link rel="stylesheet" href="static/css/drawer.css"> <!-- Separate CSS for drawer -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cheatsheet Results</title>
-    <link rel="stylesheet" href="static/css/result_style.css">
-    <style>
-
-    </style>
 </head>
 <body>
+    <!-- Logout Button (Top Right) -->
+
+
+    <!-- Side Drawer Toggle Button -->
+    <button class="drawer-toggle" id="drawer-toggle" onclick="toggleDrawer()">
+        <span class="icon">☰</span>
+    </button>
+
+    <!-- Side Drawer -->
+    <div class="drawer" id="drawer">
+        <h3>Resume</h3>
+        <iframe src="{{ resume_url }}" width="100%" height="200px"></iframe>
+        <h3>Job Description</h3>
+        <textarea id="jobDesc" readonly>{{ job_desc }}</textarea>
+
+        <!-- Buy Me a Coffee Button -->
+        <div class="buy-me-a-coffee">
+            <a href="https://www.buymeacoffee.com/gowdhamravi">
+                <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=gowdhamravi&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" />
+            </a>
+        </div>
+
+        <!-- Logout Button (Bottom of Drawer) -->
+        <form action="{{ url_for('logout') }}" method="GET">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+    </div>
+
+    <!-- Main Content -->
     <div class="container" style="max-width: 80%;">
-        <!-- Dynamically include company and role -->
         <h1 class="header">Interview cheatsheet</h1>
         <h1 class="header" id="smallerheader">{{ cheatsheet.role }} @ {{ cheatsheet.company }}</h1>
-
         {% include "swot.html" %}
         {% include "skills.html" %}
         {% include "concepts.html" %}
         {% include "qa.html" %}
         {% include "insights.html" %}
     </div>
-    <div class="buy-me-a-coffee">
-        <a href="https://www.buymeacoffee.com/gowdhamravi">
-            <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=gowdhamravi&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" />
-        </a>
-    </div>
-    <br></br>
-    <br></br>
-    <script src="static/js/result_script.js"></script>
+
+    <!-- JavaScript -->
+    <script src="static/js/drawer.js"></script> <!-- Separate JS for drawer functionality -->
 </body>
 </html>

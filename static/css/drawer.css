@@ -1,0 +1,87 @@
+/* Logout Button (Top Right) */
+.logout-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.logout-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+}
+
+/* Side Drawer Toggle Button */
+.drawer-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px; /* Adjust based on logout button width */
+    background: none;
+    color: #007bff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+}
+
+.drawer-toggle .icon {
+    display: inline-block;
+    transition: transform 0.3s ease-in-out;
+}
+
+.drawer-toggle.open .icon {
+    transform: rotate(90deg);
+}
+
+/* Side Drawer */
+.drawer {
+    position: fixed;
+    right: -350px; /* Hidden by default */
+    top: 0;
+    width: 350px;
+    height: 100%;
+    background: #f4f4f4;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition: right 0.3s ease-in-out;
+    overflow-y: auto;
+    z-index: 999;
+}
+
+.drawer.open {
+    right: 0; /* Visible when open */
+}
+
+.drawer h3 {
+    margin-top: 0;
+}
+
+.drawer textarea {
+    width: 100%;
+    height: 150px;
+    resize: none;
+    margin-bottom: 20px;
+}
+
+/* Buy Me a Coffee Button */
+.buy-me-a-coffee {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Logout Button (Bottom of Drawer) */
+.drawer .logout-button {
+    width: 100%;
+    margin-top: 20px;
+}
