@@ -134,7 +134,6 @@ def store():
     except Exception as e:
         flash(f"Error processing data: {e}", "error")
         return redirect('/')
-
 @app.route('/cheatsheet')
 def cheatsheet():
     """Generate and display the interview cheatsheet."""
@@ -144,19 +143,25 @@ def cheatsheet():
 
     user_id = session['user_id']
 
-    # Check if cheatsheet data is already in Firebase
-    cheatsheet_text = get_cheatsheet_from_firebase(user_id)
-    if cheatsheet_text:
-        print(session.get('resume_url'))
-        # Use the cheatsheet from Firebase
-        return render_template(
-            'result.html',
-            cheatsheet=cheatsheet_text,
-            resume_url=session.get('resume_url'),
-            job_desc=session.get('job_desc')
-        )
+    # Check if cheatsheet file path is already in the session
+    if 'cheatsheet_path' in session:
+        cheatsheet_path = session['cheatsheet_path']
+        try:
+            # Read the cheatsheet from the local file
+            with open(cheatsheet_path, 'r') as f:
+                cheatsheet_text = json.load(f)
 
-    # If cheatsheet data is not in Firebase, generate it
+            return render_template(
+                'result.html',
+                cheatsheet=cheatsheet_text,
+                resume_url=session.get('resume_url'),
+                job_desc=session.get('job_desc')
+            )
+        except Exception as e:
+            flash(f"Error reading cheatsheet file: {e}", "error")
+            return redirect('/')
+
+    # If cheatsheet data is not in the session, generate it
     resume_path = session.get('resume_path')
     job_desc_path = session.get('job_desc_path')
 
@@ -183,11 +188,14 @@ def cheatsheet():
                 flash("Invalid response from cheatsheet generation.", "error")
                 return redirect('/')
 
-        # Store cheatsheet data in Firebase
-        upload_cheatsheet_to_firebase(user_id, cheatsheet_text)
+        # Save the cheatsheet to a local file
+        cheatsheet_path = os.path.join(tempfile.gettempdir(), f"cheatsheet_{user_id}.json")
+        with open(cheatsheet_path, 'w') as f:
+            json.dump(cheatsheet_text, f)
 
-        # Store resume URL and job description in session (if not already stored)
-        session['job_desc'] = job_description
+        # Store the file path in the session
+        session['cheatsheet_path'] = cheatsheet_path
+
 
         return render_template(
             'result.html',
