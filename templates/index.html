@@ -10,6 +10,15 @@
 <body>
     <h1>Interview Cheatsheet</h1>
 
+    <!-- Login button or user email -->
+    <div class="top-right">
+        {% if user_id %}
+            <p>Welcome, {{ user_id }}</p>
+        {% else %}
+            <a href="/login" class="login-button">Login</a>
+        {% endif %}
+    </div>
+
     <!-- Description of Interview Cheatsheet -->
     <div class="description">
         <p>
@@ -18,8 +27,6 @@
         <p>
             Good luck!
         </p>
-
-
     </div>
 
     <br><br>

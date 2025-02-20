@@ -1,3 +1,4 @@
+# filepath: /d:/Professional - Work/contests/open source AI/interviewCheatsheet/main.py
 import json
 import os
 import tempfile
@@ -5,8 +6,8 @@ from io import BytesIO
 
 from flask import Flask, render_template, request, redirect, flash, session, url_for
 from werkzeug.utils import secure_filename
+
 from authentication import (
-    firebase_authenticate,
     upload_resume_to_firebase,
     upload_job_description_to_firebase,
     get_resume_from_firebase,
@@ -33,6 +34,25 @@ def allowed_file(filename):
 def index():
     """Render the homepage."""
     return render_template('index.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """Handle user login."""
+    if request.method == 'POST':
+        id_token = request.form['idToken']
+        try:
+            decoded_token = auth.verify_id_token(id_token)
+            user_id = decoded_token['uid']
+            session['user_id'] = user_id
+            session['user_email'] = decoded_token['email']
+            return redirect('/authenticate')
+        except Exception as e:
+            flash("Invalid token", "error")
+            return redirect('/login')
+
+
+
+    return render_template('login.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -77,24 +97,6 @@ def authenticate():
         return redirect('/login')
     return redirect('/store')
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    """Handle user login."""
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-
-        user = firebase_authenticate(email, password)
-
-        if user:
-            session['user_id'] = user['localId']
-            return redirect('/authenticate')
-        else:
-            flash("Invalid email or password", "error")
-            return redirect('/login')
-
-    return render_template('login.html')
-
 @app.route('/store')
 def store():
     """Store resume and job description in Firebase."""
@@ -122,7 +124,7 @@ def store():
         # Upload resume to Firebase
         resume_url = upload_resume_to_firebase(BytesIO(resume_data), "resume.pdf", user_id)
         print(f"Resume uploaded: {resume_url}")
-        session['resume_url']= resume_url
+        session['resume_url'] = resume_url
 
         # Upload job description to Firebase
         job_desc_url = upload_job_description_to_firebase(job_description, user_id)
@@ -134,6 +136,22 @@ def store():
     except Exception as e:
         flash(f"Error processing data: {e}", "error")
         return redirect('/')
+
+@app.route('/config')
+def get_firebase_config():
+    """Return Firebase config for frontend initialization."""
+    firebase_config = {
+        "apiKey": os.getenv("FIREBASE_API_KEY"),
+        "authDomain": os.getenv("FIREBASE_AUTH_DOMAIN"),
+        "projectId": os.getenv("FIREBASE_PROJECT_ID"),
+        "storageBucket": os.getenv("FIREBASE_STORAGE_BUCKET"),
+        "messagingSenderId": os.getenv("FIREBASE_MESSAGING_SENDER_ID"),
+        "appId": os.getenv("FIREBASE_APP_ID"),
+        "databaseURL": os.getenv("FIREBASE_DATABASE_URL"),
+    }
+    return json.dumps(firebase_config), 200, {"Content-Type": "application/json"}
+
+
 @app.route('/cheatsheet')
 def cheatsheet():
     """Generate and display the interview cheatsheet."""
@@ -196,7 +214,6 @@ def cheatsheet():
         # Store the file path in the session
         session['cheatsheet_path'] = cheatsheet_path
 
-
         return render_template(
             'result.html',
             cheatsheet=cheatsheet_text,
@@ -206,7 +223,8 @@ def cheatsheet():
     except Exception as e:
         flash(f"Error generating cheatsheet: {e}", "error")
         return redirect('/')
-@app.route('/logout',methods=['GET'])
+
+@app.route('/logout', methods=['GET'])
 def logout():
     """Log out the user and clear the session."""
     session.clear()
