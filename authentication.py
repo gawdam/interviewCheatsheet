@@ -149,13 +149,16 @@ def upload_cheatsheet_to_firebase(user_id, cheatsheet_text):
 
         # Convert the cheatsheet text (dictionary) to a JSON string
         cheatsheet_json = json.dumps(cheatsheet_text)
+        print("pass 0")
 
         # Convert the JSON string to a file-like object
         cheatsheet_bytes = io.BytesIO(cheatsheet_json.encode('utf-8'))
-
+        print("pass 1")
         # Upload the file to Firebase
         storage.child(cheatsheet_path).put(cheatsheet_bytes)
+        print("pass 2")
 
+        print("CHEATSHEET STORAGE URL: " + storage.child(cheatsheet_path).get_url(None))
         # Return the public URL of the uploaded file
         return storage.child(cheatsheet_path).get_url(None)
     except Exception as e:

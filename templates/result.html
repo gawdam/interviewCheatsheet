@@ -1,48 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheatsheet Results</title>
     <link rel="stylesheet" href="static/css/skillstyle.css">
     <link rel="stylesheet" href="static/css/concepts.css">
     <link rel="stylesheet" href="static/css/qa.css">
     <link rel="stylesheet" href="static/css/insights.css">
     <link rel="stylesheet" href="static/css/result_style.css">
     <link rel="stylesheet" href="static/css/drawer.css"> <!-- Separate CSS for drawer -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cheatsheet Results</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Logout Button (Top Right) -->
-
-
     <!-- Side Drawer Toggle Button -->
-    <button class="drawer-toggle" id="drawer-toggle" onclick="toggleDrawer()">
-        <span class="icon">☰</span>
+    <button class="drawer-toggle" id="drawer-toggle">
+        <i class="fas fa-bars"></i>
     </button>
 
     <!-- Side Drawer -->
     <div class="drawer" id="drawer">
-        <h3>Resume</h3>
-        <iframe src="{{ resume_url }}" width="100%" height="200px"></iframe>
-        <h3>Job Description</h3>
-        <textarea id="jobDesc" readonly>{{ job_desc }}</textarea>
+        <div class="drawer-content">
+            <h3>Resume</h3>
+            <div class="resume-container">
+                <iframe src="{{ resume_url }}" title="Resume"></iframe>
+            </div>
+            
+            <h3>Job Description</h3>
+            <textarea id="jobDesc">{{ job_description }}</textarea>
 
-        <!-- Buy Me a Coffee Button -->
-        <div class="buy-me-a-coffee">
-            <a href="https://www.buymeacoffee.com/gowdhamravi">
-                <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=gowdhamravi&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" />
-            </a>
+            <div class="button-group">
+                <!-- Generate New Button -->
+                <button class="drawer-button" onclick="window.location.href='/'">
+                    <i class="fas fa-file-alt"></i>
+                    Generate New Cheatsheet
+                </button>
+
+                <!-- Buy Me a Coffee Button -->
+                <a href="https://www.buymeacoffee.com/gowdhamravi" target="_blank" class="drawer-button">
+                    <i class="fas fa-coffee"></i>
+                    Buy me a coffee
+                </a>
+
+                <!-- Logout Button -->
+                <form action="{{ url_for('logout') }}" method="GET">
+                    <button type="submit" class="drawer-button">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </form>
+            </div>
         </div>
-
-        <!-- Logout Button (Bottom of Drawer) -->
-        <form action="{{ url_for('logout') }}" method="GET">
-            <button type="submit" class="logout-button">Logout</button>
-        </form>
     </div>
 
     <!-- Main Content -->
-    <div class="container" style="max-width: 80%;">
+    <div class="container">
         <h1 class="header">Interview cheatsheet</h1>
         <h1 class="header" id="smallerheader">{{ cheatsheet.role }} @ {{ cheatsheet.company }}</h1>
         {% include "swot.html" %}
@@ -52,7 +64,6 @@
         {% include "insights.html" %}
     </div>
 
-    <!-- JavaScript -->
-    <script src="static/js/drawer.js"></script> <!-- Separate JS for drawer functionality -->
+    <script src="static/js/drawer.js"></script>
 </body>
 </html>

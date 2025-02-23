@@ -38,7 +38,6 @@ def generate_interview_cheatsheet(resume, job_description):
 
         # Validate and parse response
         message = response.text
-        print(message)
 
         try:
             parsed_content = json.loads(message)  # Ensure JSON format
@@ -46,7 +45,6 @@ def generate_interview_cheatsheet(resume, job_description):
             raise ValueError("OpenAI response is not valid JSON")
         # Replace YouTube videos with links
         json_with_yt_link = replace_youtube_videos_with_links(parsed_content, api_key=os.getenv("YTAPIKEY"))
-        print(json_with_yt_link)
         return json_with_yt_link
 
     except Exception as e:

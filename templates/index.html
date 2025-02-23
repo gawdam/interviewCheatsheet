@@ -12,8 +12,8 @@
 
     <!-- Login button or user email -->
     <div class="top-right">
-        {% if user_id %}
-            <p>Welcome, {{ user_id }}</p>
+        {% if user_name %}
+            <p>Welcome, {{ user_name }}</p>
         {% else %}
             <a href="/login" class="login-button">Login</a>
         {% endif %}

@@ -1,87 +1,169 @@
-/* Logout Button (Top Right) */
-.logout-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
+/* Base styles */
+:root {
+  --drawer-width: 33.333vw;
+  --primary-color: #2563eb;
+  --hover-color: #1d4ed8;
+  --background-color: #f3f4f6;
+  --drawer-bg: #ffffff;
+  --text-color: #1f2937;
 }
 
-.logout-button {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
-.logout-button:hover {
-    background-color: #c82333;
-}
-
-/* Side Drawer Toggle Button */
+/* Drawer Toggle Button */
 .drawer-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px; /* Adjust based on logout button width */
-    background: none;
-    color: #007bff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 24px;
-    z-index: 1000;
-    transition: transform 0.3s ease-in-out;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.drawer-toggle .icon {
-    display: inline-block;
-    transition: transform 0.3s ease-in-out;
+.drawer-toggle:hover {
+  transform: scale(1.1);
 }
 
-.drawer-toggle.open .icon {
-    transform: rotate(90deg);
+.drawer-toggle i {
+  font-size: 20px;
+  color: var(--text-color);
 }
 
-/* Side Drawer */
+/* Drawer */
 .drawer {
-    position: fixed;
-    right: -350px; /* Hidden by default */
-    top: 0;
-    width: 350px;
-    height: 100%;
-    background: #f4f4f4;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    transition: right 0.3s ease-in-out;
-    overflow-y: auto;
-    z-index: 999;
+  position: fixed;
+  top: 0;
+  right: calc(-1 * var(--drawer-width));
+  width: var(--drawer-width);
+  height: 100vh;
+  background-color: var(--drawer-bg);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease;
+  z-index: 999;
 }
 
 .drawer.open {
-    right: 0; /* Visible when open */
+  right: 0;
 }
 
-.drawer h3 {
-    margin-top: 0;
+.drawer-content {
+  padding: 2rem;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.drawer textarea {
-    width: 100%;
-    height: 150px;
-    resize: none;
-    margin-bottom: 20px;
+/* Resume Container */
+.resume-container {
+  flex: 1;
+  min-height: 400px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.resume-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Job Description Textarea */
+#jobDesc {
+  width: 100%;
+  height: 150px;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  resize: none;
+  font-family: inherit;
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+/* Common Button Styles */
+.drawer-button {
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  text-decoration: none;
+  color: #303030;
+  font-size: 18px;
+  border-radius: 0px;
+  width: 100%;
+  height: 40px;
+  font-weight: bold;
+  border: 2px solid #333333;
+  transition: 0.3s;
+  box-shadow: 5px 5px 0px 0px rgba(51, 51, 51, 1);
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.drawer-button:hover {
+  box-shadow: 0 0 #333;
+  color: #fff;
+  background-color: #333;
+}
+
+.drawer-button i {
+  margin-right: 8px;
 }
 
 /* Buy Me a Coffee Button */
 .buy-me-a-coffee {
-    margin-top: 20px;
-    text-align: center;
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
 }
 
-/* Logout Button (Bottom of Drawer) */
-.drawer .logout-button {
-    width: 100%;
-    margin-top: 20px;
+.buy-me-a-coffee img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Main Container */
+.container {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 2rem;
+  transition: margin-right 0.3s ease;
+}
+
+.container.drawer-open {
+  margin-right: var(--drawer-width);
+}
+
+/* Headers */
+.header {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+#smallerheader {
+  font-size: 1.5rem;
+  color: #4b5563;
 }

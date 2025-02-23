@@ -1,28 +1,33 @@
-// Toggle Drawer Functionality
-function toggleDrawer() {
+document.addEventListener('DOMContentLoaded', function() {
     const drawer = document.getElementById('drawer');
-    const toggleButton = document.getElementById('drawer-toggle');
-    const icon = toggleButton.querySelector('.icon');
+    const drawerToggle = document.getElementById('drawer-toggle');
+    const container = document.querySelector('.container');
+    let isDrawerOpen = false;
 
-    drawer.classList.toggle('open');
-    toggleButton.classList.toggle('open');
-
-    // Change icon to "X" when drawer is open
-    if (drawer.classList.contains('open')) {
-        icon.textContent = '×'; // Unicode for "X"
-    } else {
-        icon.textContent = '☰'; // Unicode for "three lines"
+    function toggleDrawer() {
+        isDrawerOpen = !isDrawerOpen;
+        drawer.classList.toggle('open');
+        container.classList.toggle('drawer-open');
+        
+        // Update toggle button icon
+        const icon = drawerToggle.querySelector('i');
+        icon.classList.remove(isDrawerOpen ? 'fa-bars' : 'fa-times');
+        icon.classList.add(isDrawerOpen ? 'fa-times' : 'fa-bars');
     }
-}
 
-// Close Drawer on Click Outside
-document.addEventListener('click', function (event) {
-    const drawer = document.getElementById('drawer');
-    const toggleButton = document.getElementById('drawer-toggle');
+    drawerToggle.addEventListener('click', toggleDrawer);
 
-    if (!drawer.contains(event.target) && !toggleButton.contains(event.target)) {
-        drawer.classList.remove('open');
-        toggleButton.classList.remove('open');
-        toggleButton.querySelector('.icon').textContent = '☰'; // Reset icon
-    }
+    // Close drawer when clicking outside
+    document.addEventListener('click', function(event) {
+        const isClickInside = drawer.contains(event.target) || drawerToggle.contains(event.target);
+        
+        if (!isClickInside && isDrawerOpen) {
+            toggleDrawer();
+        }
+    });
+
+    // Prevent drawer close when clicking inside
+    drawer.addEventListener('click', function(event) {
+        event.stopPropagation();
+    });
 });
