@@ -1,17 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="2;url={{ redirect_url }}">
     <title>Processing...</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-    
+    <link rel="stylesheet" href="static/css/loading.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="loading-container">
-        <p>Processing... Please wait.</p>
-        <div class="loader"></div>
+    <div class="main-container">
+        <div class="loading-container">
+            <p>Processing... Please wait.</p>
+            <div class="loader"></div>
+        </div>
+        
+        <div class="tips-container">
+            <div class="tips-header">
+                <i class="fa-solid fa-lightbulb"></i>
+                <h3>Tip corner</h3>
+            </div>
+            <div class="tips-content">
+                <button class="nav-btn prev-btn">&larr;</button>
+                <div class="tip" id="tipDisplay">Loading tips...</div>
+                <button class="nav-btn next-btn">&rarr;</button>
+            </div>
+        </div>
+        
     </div>
+
+    <script>
+        let tips = [];
+        let currentTipIndex = 0;
+        const tipDisplay = document.getElementById('tipDisplay');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+
+        // Fetch tips from the file with the correct path
+        fetch('static/tips.txt')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(text => {
+                tips = text.split('\n').filter(tip => tip.trim() !== '');
+                if (tips.length > 0) {
+                    showTip(0);
+                } else {
+                    tipDisplay.textContent = "No tips available";
+                }
+            })
+            .catch(error => {
+                console.error('Error loading tips:', error);
+                tipDisplay.textContent = "Could not load tips";
+            });
+
+        function showTip(index) {
+            tipDisplay.textContent = tips[index];
+        }
+
+        function nextTip() {
+            currentTipIndex = (currentTipIndex + 1) % tips.length;
+            showTip(currentTipIndex);
+        }
+
+        function prevTip() {
+            currentTipIndex = (currentTipIndex - 1 + tips.length) % tips.length;
+            showTip(currentTipIndex);
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', prevTip);
+        nextBtn.addEventListener('click', nextTip);
+
+        // Auto-rotate tips every 5 seconds
+        setInterval(nextTip, 5000);
+    </script>
 </body>
 </html>

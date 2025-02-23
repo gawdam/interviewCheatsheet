@@ -11,7 +11,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
 }
@@ -23,17 +23,19 @@ body {
   right: 20px;
   z-index: 1000;
   background-color: white;
-  border: none;
-  border-radius: 50%;
+  border: 2px solid #333333;
+  border-radius: 0px;
   width: 48px;
   height: 48px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 5px 5px 0px 0px rgba(51, 51, 51, 1);
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: 0.3s;
 }
 
 .drawer-toggle:hover {
-  transform: scale(1.1);
+  box-shadow: 0 0 #333;
+  color: #fff;
+  background-color: #333;
 }
 
 .drawer-toggle i {
@@ -64,16 +66,27 @@ body {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
+}
+
+/* Headers within the drawer */
+.drawer-content h3 {
+  margin-bottom: 0.5rem; /* Reduce gap between header and content */
+  margin-top: 0;
+  font-size: 1.2rem;
+  color: var(--text-color);
 }
 
 /* Resume Container */
 .resume-container {
   flex: 1;
-  min-height: 400px;
+  justify-content: center;
+  min-height: 200px;
+  max-height: 500px;
   background: #f8f9fa;
   border-radius: 8px;
   overflow: hidden;
+  margin-top: 0.25rem; /* Reduce gap */
 }
 
 .resume-container iframe {
@@ -84,13 +97,14 @@ body {
 
 /* Job Description Textarea */
 #jobDesc {
-  width: 100%;
   height: 150px;
-  padding: 1rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  resize: none;
-  font-family: inherit;
+  padding: 0.75rem;
+  border: 2px solid #333333;
+  border-radius: 0px;
+  box-shadow: 5px 5px 0px 0px rgba(51, 51, 51, 1);
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  margin-top: 0.25rem;
+  resize: vertical;
 }
 
 /* Button Group */

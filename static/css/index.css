@@ -26,22 +26,39 @@ body {
   background-color: #e0e0e0;
 }
 
-.upload-box {
-  border: 2px dashed #333333;
-  border-radius: 10px;
-  width: 350px;
-  height: 200px;
-  font-size: 16px;
+.upload-box.filled {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  cursor: pointer;
-  background-color: #FFFFFF;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden;
+  align-items: center;
   position: relative;
+  background: none;
+  border: none;
 }
+
+.upload-box.filled img,
+.upload-box.filled p,
+.upload-box.filled .pdf-instruction {
+  display: none;
+}
+
+.upload-box.filled iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.upload-box,
+textarea {
+  width: 350px;  /* Set both elements to the same width */
+  height: 200px; /* Set both elements to the same height */
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #333333;
+  border-radius: 10px;
+  resize: none; /* Prevent resizing */
+  box-shadow: 5px 5px 0px 0px rgba(51, 51, 51, 1);
+}
+
 
 .upload-box.dragover {
   background-color: #E2E2E2;
@@ -82,7 +99,7 @@ iframe {
 
 body {
   font-family: Futura, "Trebuchet MS", Arial, sans-serif;
-  margin: 50px;
+  margin: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -148,7 +165,9 @@ iframe {
 
 .original-button {
   font-family: Futura, "Trebuchet MS", Arial, sans-serif;
-  display: flex;
+  display: flex; 
+  width: 100%;
+  height: 200px;
   align-items: center;
   justify-content: center;
   line-height: 1;
@@ -156,13 +175,15 @@ iframe {
   color: #303030;
   font-size: 18px;
   border-radius: 0px;
-  width: 200px;
   height: 40px;
   font-weight: bold;
   border: 2px solid #333333;
   transition: 0.3s;
   box-shadow: 5px 5px 0px 0px rgba(51, 51, 51, 1);
   background-color: #ffffff;
+  cursor: pointer;
+  gap: 0.5rem;
+  padding: 0 1.5rem;
 }
 
 .original-button:hover {
@@ -200,9 +221,9 @@ iframe {
 
 textarea {
   font-family: Futura, "Trebuchet MS", Arial, sans-serif;
-  width: 350px;
+  /* width: 350px;
   height: 180px;
-  padding: 10px;
+  padding: 10px; */
   font-size:14px;
 
   border: 1px solid #ccc;
@@ -258,7 +279,7 @@ h1 {
     text-align: center;
     font-size: 36px;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .upload-box.dragging {
@@ -295,132 +316,207 @@ h1 {
     100% { transform: rotate(360deg); }
 }
 
+/* Existing styles remain unchanged */
 
+/* Drawer styles */
+.drawer-trigger {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem;
+  background: white;
+  border: 2px solid #333333;
+  border-radius: 0px;
+  box-shadow: 5px 5px 0px 0px rgba(51, 51, 51, 1);
+  cursor: pointer;
+  z-index: 40;
+  transition: 0.3s;
+}
 
+.drawer-trigger:hover {
+  box-shadow: 0 0 #333;
+  color: #fff;
+  background-color: #333;
+}
 
+.drawer-trigger svg {
+  display: block;
+}
+
+.drawer-trigger:hover svg {
+  stroke: #fff;
+}
+
+.drawer-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 45;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: -500px;
+  width: 500px;
+  height: 100%;
+  background: white;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer.open {
+  right: 0;
+}
+
+.drawer-backdrop.open {
+  display: block;
+}
+
+.drawer-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.drawer-content {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.drawer-footer {
+  padding: 1.5rem;
+  border-top: 1px solid #e5e5e5;
+}
+
+.close-drawer {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.username {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}
+
+/* Login Container */
+.login-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 40;
+}
+
+/* Common Button Styles */
+.discord-button, .logout-button, .login-button {
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  display: flex;
+  /* width: 200px; */
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  text-decoration: none;
+  color: #303030;
+  font-size: 18px;
+  border-radius: 0px;
+  height: 40px;
+  font-weight: bold;
+  border: 2px solid #333333;
+  transition: 0.3s;
+  box-shadow: 5px 5px 0px 0px rgba(51, 51, 51, 1);
+  background-color: #ffffff;
+  cursor: pointer;
+  gap: 0.5rem;
+  padding: 0 1.5rem;
+}
+
+.discord-button, .logout-button{
+  width: 70%;
+}
+
+.discord-button:hover, .logout-button:hover, .login-button:hover {
+  box-shadow: 0 0 #333;
+  color: #fff;
+  background-color: #333;
+}
+
+.discord-button svg, .logout-button svg, .login-button svg {
+  transition: fill 0.3s, stroke 0.3s;
+}
+
+.discord-button:hover svg, .logout-button:hover svg, .login-button:hover svg {
+  fill: #fff;
+  stroke: #fff;
+}
+
+.discord-button {
+  margin-top: 1rem;
+}
+
+/* Form styles */
+textarea#jobDescription {
+  /* width: 100%; */
+  padding: 1rem;
+  border: 2px solid #333333;
+  border-radius: 0px;
+  box-shadow: 5px 5px 0px 0px rgba(51, 51, 51, 1);
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  margin-bottom: 1rem;
+  resize: horizontal;
+  min-height: 150px;
+}
+
+.upload-box {
+  border: 2px solid #333333;
+  border-radius: 0px;
+  box-shadow: 5px 5px 0px 0px rgba(51, 51, 51, 1);
+  transition: 0.3s;
+}
+
+.upload-box:hover {
+  box-shadow: 0 0 #333;
+  background-color: #f5f5f5;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
 
 
 .container {
-  display: flex;
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
-.upload-section {
-  flex: 1;
-  /* No need for margin-right */
-}
-
-.job-description-section {
-  flex: 1;
-}
-
-.pdf-instruction p{
-  font-size: 10px;
-  color: #999999; /* Gray color */
-}
-
-.divider {
-  width: 2px; /* Adjust divider width as needed */
-  height: 200px; /* Adjust divider height to match upload box */
-  background-color: #ccc;
-  margin: 0 30px; /* Add some spacing around the divider */
-}
-
-textarea {
-  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
-  width: 350px;
-  height: 180px;
-  padding: 10px;
-  font-size:14px;
-
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  resize: vertical;
-}
-
-/* Styling for the description section */
-/* Center the description text */
-.description {
-    width: 60%;
-    margin: 0 auto; /* Centers the description block */
-    font-size: 18pax;
-    line-height: 1.6;
-    color: #333;
-    text-align: center; /* Centers the text */
-}
-
-.flash-message {
-    position: fixed;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 20px;
-    background-color: #f44336; /* Red for error messages */
-    color: white;
-    border-radius: 5px;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: fadeInOut 4s forwards;
-}
-
-/* Animation for fading out the flash message */
-@keyframes fadeInOut {
-    0% {
-        opacity: 0;
-    }
-    25% {
-        opacity: 1;
-    }
-    75% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-
-
-
-/* Styling for the main header */
+/* Typography */
 h1 {
-    text-align: center;
-    font-size: 36px;
-    color: #333;
-    margin-bottom: 20px;
+  text-align: center;
+  font-size: 2.25rem;
+  color: #1f2937;
+  margin-bottom: 1rem;
 }
 
-.upload-box.dragging {
-    border: 2px dashed #4caf50; /* Change border style when file is dragged over */
-    background-color: #f1f1f1;
+.description {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.75;
 }
-
-/* Style for loading screen */
-.loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;  /* Hidden by default */
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    color: white;
-}
-
-.loader {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #3498db;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-
-
