@@ -1,6 +1,8 @@
 # InterviewPrepz: AI-Powered Interview Cheatsheet Generator
 
 This project provides a web application that generates a comprehensive interview cheatsheet based on a candidate's resume and the job description.  The application leverages AI to analyze the input documents and create a tailored resource to help candidates prepare for interviews.
+![image](https://github.com/user-attachments/assets/7e05d6f3-68d2-4e2e-927f-419e31311bad)
+
 
 ## Features
 
@@ -96,6 +98,19 @@ The `requirements.txt` file lists all necessary Python packages.
 ## Contributing
 
 Contributions are welcome!  Please open an issue or submit a pull request.
+
+## Gallery
+* Homepage
+![image](https://github.com/user-attachments/assets/37fa01d4-54bb-4d38-b0d5-5e0997a75652)
+* Cheatsheet -
+![image](https://github.com/user-attachments/assets/830e89ee-c45c-4ee5-b877-abd468f537dc)
+![image](https://github.com/user-attachments/assets/f5b1b43c-4c48-4eef-b923-09eb8cfa1c12)
+![image](https://github.com/user-attachments/assets/5c0f6fc2-fff9-4054-8986-5254d4f6b3cb)
+![image](https://github.com/user-attachments/assets/04b67ef8-b296-4854-8c6e-b7e04f8e9d8b)
+![image](https://github.com/user-attachments/assets/88ec3e71-089b-4804-8d96-83040fff4b77)
+
+
+* 
 
 
 ## Testing
