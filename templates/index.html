@@ -7,9 +7,18 @@
     <title>InterviewPrepz</title>
     <link rel="stylesheet" href="static/css/index.css">
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YLJMPJKPT6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YLJMPJKPT6');
+</script>
 <body>
     <div style="display: flex; align-items: center;">
-        <h1 style="margin-right: 10px;">InterviewPrepz</h1>
+        <h1 style="margin-right: 10px;">InterviewPrepz.com</h1>
         <img src="static/logo.png" alt="Logo" style="height: 3em;">
     </div>
 
@@ -83,6 +92,14 @@
 
     </div>
 
+    <div class="mode-toggle-container">
+        <span class="mode-label candidate-label active">Candidate</span>
+        <label class="switch">
+          <input type="checkbox" id="modeToggle">
+          <span class="slider round"></span>
+        </label>
+        <span class="mode-label interviewer-label">Interviewer</span>
+      </div>
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -113,10 +130,11 @@
 
     <!-- Form now contains both the file input and job description textarea -->
     <form action="/submit" method="POST" enctype="multipart/form-data" id="upload-form">
+        
         <textarea id="jobDescription" name="jobDescription" placeholder="Paste the job description here"></textarea>
         <input id="file-input" class="hidden-input" type="file" name="file" accept="application/pdf" onchange="handleFileInput(event)">
         <br>
-        <button type="submit" class="original-button">Generate your interview cheatsheet</button>
+        <button type="submit" id="submit-button" class="original-button">Generate your interview cheatsheet</button>
     </form>
 
     <!-- Loading screen -->

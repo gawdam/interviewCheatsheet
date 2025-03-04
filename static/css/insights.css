@@ -47,3 +47,292 @@
 .status-column:empty {
     color: #ccc;
 }
+
+body {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9fafb;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  
+  .description {
+    width: 60%;
+    margin: 0 auto 30px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  .container {
+    display: flex;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+    align-items: stretch;
+  }
+  
+  .upload-section, .job-description-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .divider {
+    width: 2px;
+    height: 200px;
+    background-color: #ccc;
+    margin: 0 30px;
+    align-self: stretch;
+  }
+  
+  .upload-box, textarea {
+    width: 350px;
+    height: 200px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #333333;
+    border-radius: 10px;
+    resize: none;
+    box-shadow: 5px 5px 0px 0px rgba(51, 51, 51, 1);
+    transition: all 0.3s ease;
+  }
+  
+  .upload-box {
+    border: 2px dashed #333333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .upload-box:hover {
+    box-shadow: 0 0 #333;
+    background-color: #f5f5f5;
+  }
+  
+  .upload-box.dragover {
+    background-color: #E2E2E2;
+    border-color: #007BFF;
+    box-shadow: 0 4px 8px rgba(123, 123, 123, 0.2);
+  }
+  
+  .upload-box img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+  
+  .upload-box p {
+    margin: 0;
+    color: #333333;
+    font-weight: bold;
+  }
+  
+  .pdf-instruction p {
+    font-size: 10px;
+    color: #999999;
+    margin-top: 8px;
+  }
+  
+  textarea {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    background-color: #FFFFFF;
+  }
+  
+  textarea:focus {
+    outline: none;
+    border-color: #4f46e5;
+  }
+  
+  .hidden-input {
+    display: none;
+  }
+  
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  
+  .preview-hidden {
+    display: none;
+  }
+  
+  .original-button {
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    display: flex;
+    width: 100%;
+    max-width: 800px;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    text-decoration: none;
+    color: #303030;
+    font-size: 18px;
+    border-radius: 0px;
+    height: 40px;
+    font-weight: bold;
+    border: 2px solid #333333;
+    transition: 0.3s;
+    box-shadow: 5px 5px 0px 0px rgba(51, 51, 51, 1);
+    background-color: #ffffff;
+    cursor: pointer;
+    gap: 0.5rem;
+    padding: 0 1.5rem;
+  }
+  
+  .original-button:hover {
+    box-shadow: 0 0 #333;
+    color: #fff;
+    background-color: #333;
+  }
+  
+  /* Loading screen */
+  .loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: white;
+    flex-direction: column;
+  }
+  
+  .loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    margin-top: 20px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Mode toggle switch */
+  .mode-toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  
+  .mode-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #6b7280;
+    transition: color 0.3s ease;
+  }
+  
+  .mode-label.active {
+    color: #333;
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    margin: 0 15px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #333333;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #333333;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(30px);
+  }
+  
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+    
+    .divider {
+      width: 100%;
+      height: 2px;
+      margin: 20px 0;
+    }
+    
+    .upload-box, textarea {
+      width: 100%;
+    }
+  }

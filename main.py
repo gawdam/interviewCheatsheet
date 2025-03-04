@@ -18,6 +18,7 @@ from CRUD import (
 )
 import CRUD
 
+
 from functions.generate_interview_cheatsheet import generate_interview_cheatsheet
 
 
@@ -50,7 +51,7 @@ def allowed_file(filename):
 
 @app.route('/')
 def index():
-
+    print("/")
     # Pass auth and storage to CRUD module
     session.pop('cheatsheet_URL', None)
     session.pop('job_desc_url', None)
@@ -62,6 +63,8 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    print("/login")
+
     if request.method == 'POST':
         id_token = request.form.get('idToken')
         if not id_token:
@@ -82,6 +85,8 @@ def login():
 
 @app.route('/set-token', methods=['POST'])
 def set_token():
+    print("/set-token")
+
     """ Verify Firebase ID Token and store it in the session """
     try:
         data = request.get_json()
@@ -109,6 +114,7 @@ def set_token():
 
 @app.route('/authenticate', methods=['GET', 'POST'])
 def authenticate():
+    print("/authenticate")
     """ Authenticate user from session token """
     id_token = session.get('id_token')  # 🔥 Read token from session
     if not id_token:
@@ -133,6 +139,7 @@ def authenticate():
 
 @app.route('/submit', methods=['POST'])
 def submit():
+    print("/submit")
     file = request.files.get('file')
     job_description = request.form.get('jobDescription', '').strip()
 
@@ -152,14 +159,50 @@ def submit():
 
         session['resume_path'] = resume_path
         session['job_desc_path'] = job_desc_path
+        session['type'] = "candidate"
 
         return redirect('/store')  # Redirect to store (which will now show the loading screen)
 
     flash('Invalid file or no file uploaded.', 'error')
     return redirect('/')
 
+@app.route('/submitInterviewer', methods=['POST'])
+def submitInterviewer():
+    print("/submitInterviewer")
+
+    file = request.files.get('file')
+    job_description = request.form.get('jobDescription', '').strip()
+
+    if not job_description:
+        flash('Job description is required.', 'error')
+        return redirect('/')
+
+    if file and allowed_file(file.filename):
+        resume_filename = secure_filename(file.filename)
+        resume_path = os.path.join(TEMP_UPLOAD_FOLDER, resume_filename)
+        file.save(resume_path)
+
+        # Save job description to a temporary file
+        job_desc_path = os.path.join(TEMP_UPLOAD_FOLDER, "job_desc.txt")
+        with open(job_desc_path, "w", encoding="utf-8") as f:
+            f.write(job_description)
+
+        session['resume_path'] = resume_path
+        session['job_desc_path'] = job_desc_path
+        session['type'] = "interviewer"
+
+        return redirect('/store')  # Redirect to store (which will now show the loading screen)
+
+    flash('Invalid file or no file uploaded.', 'error')
+    return redirect('/')
+
+
+
+
 @app.route('/store')
 def store():
+    print("/store")
+
     if 'user_id' not in session:
         return redirect('/login')
 
@@ -175,6 +218,8 @@ def store():
 
 @app.route('/process')
 def process():
+    print("/process")
+
     if 'user_id' not in session:
         return redirect('/login')
 
@@ -193,9 +238,9 @@ def process():
         resume_url = upload_resume(BytesIO(resume_data), "resume.pdf", user_id)
         job_desc_url = upload_job_description(job_description, user_id)
 
-        cheatsheet_text = generate_interview_cheatsheet(BytesIO(resume_data), job_description)
-        print(f"Cheatsheet text: {cheatsheet_text}")
+        cheatsheet_text = generate_interview_cheatsheet(BytesIO(resume_data), job_description,type=session['type'])
         cheatsheet_url = upload_cheatsheet(user_id, cheatsheet_text)
+
 
         session['resume_url'] = resume_url
         session['job_desc_url'] = job_desc_url
@@ -204,8 +249,36 @@ def process():
     except Exception as e:
         flash(f"Error processing data: {e}", "error")
         return redirect('/')
+    
+    if session['type'] == "interviewer":
+        return redirect('/screening-results')
 
     return redirect('/cheatsheet')
+
+@app.route('/screening-results')
+def screening_results():
+    user_id = session["user_id"]
+
+    cheatsheet_URL = get_cheatsheet(user_id)
+    if not cheatsheet_URL:
+        flash("No cheatsheet available.", "error")
+        return redirect('/')
+    cheatsheet_text = None
+    if cheatsheet_URL:
+        try:
+            response = requests.get(cheatsheet_URL)
+            if response.status_code == 200:
+                cheatsheet_text = response.text
+            else:
+                flash("Failed to retrieve cheatsheet.", "error")
+        except Exception as e:
+            flash(f"Error retrieving cheatsheet: {str(e)}", "error")
+    print(f"Cheatsheet text: {cheatsheet_URL}")
+
+    cheatsheet_json = json.loads(cheatsheet_text)
+
+    # Your cheatsheet_data is already in your Flask app
+    return render_template('screeningResults.html', candidate_data=cheatsheet_json)
 
 
 @app.route('/cheatsheet')

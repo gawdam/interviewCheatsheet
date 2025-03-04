@@ -10,6 +10,15 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YLJMPJKPT6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YLJMPJKPT6');
+</script>
 <body>
     <div id="message-container" style="display: none;" class="message">
         <p id="message"></p>
@@ -19,7 +28,9 @@
     <div class="container">
         <div class="auth-card">
             <div class="header">
-                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo" width="48" height="48">
+                <div class="logo-container">
+                    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+                </div>
                 <h2 id="title">Welcome back</h2>
                 <p id="subtitle">Sign in to your account to continue</p>
             </div>

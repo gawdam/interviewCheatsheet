@@ -8,3 +8,6 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - 5002:5002
+    environment:
+      DEBUG: "true"
+    env_file: ".env"

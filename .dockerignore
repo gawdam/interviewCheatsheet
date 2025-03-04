@@ -23,6 +23,5 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
-**/serviceAccountKey.json
 LICENSE
 README.md

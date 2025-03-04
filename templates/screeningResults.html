@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidate Assessment</title>
+  <link rel="stylesheet" href="static/css/screeningStyle.css">
+</head>
+<body>
+  <div class="container">
+    <div class="back-button-container">
+      <a href="/" class="back-button">
+        <span class="back-arrow">←</span> Back to Home
+      </a>
+    </div>
+    <header class="header">
+      <div class="header-content">
+        <div class="candidate-info">
+          <h1 id="candidate-name"></h1>
+          <p id="current-role" class="role"></p>
+          <div class="contact-info">
+            <p id="email"></p>
+            <p id="phone"></p>
+            <p id="location"></p>
+          </div>
+        </div>
+        <div class="decision-info">
+          <div class="priority-container">
+            <span>Priority:</span>
+            <span id="priority-badge" class="badge-small"></span>
+          </div>
+          <div id="interview-type-container" class="mt-1"></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Candidate Overview -->
+      <div class="card">
+        <h2 class="card-title">
+          <span class="icon">👤</span> Candidate Overview
+        </h2>
+        <div class="overview-grid">
+          <div class="overview-item">
+            <div class="overview-label">Experience</div>
+            <div id="years-experience" class="overview-value"></div>
+          </div>
+          <div class="overview-item">
+            <div class="overview-label">Technical Fit</div>
+            <div class="score-bar-container">
+              <div id="technical-fit" class="score-bar"></div>
+              <span id="technical-fit-score" class="score-value"></span>
+            </div>
+          </div>
+          <div class="overview-item">
+            <div class="overview-label">Experience Fit</div>
+            <div class="score-bar-container">
+              <div id="experience-fit" class="score-bar"></div>
+              <span id="experience-fit-score" class="score-value"></span>
+            </div>
+          </div>
+          <div class="overview-item">
+            <div class="overview-label">Culture Fit</div>
+            <div class="score-bar-container">
+              <div id="culture-fit" class="score-bar"></div>
+              <span id="culture-fit-score" class="score-value"></span>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <h3>Key Strengths</h3>
+          <ul id="strengths" class="list"></ul>
+        </div>
+      </div>
+
+      <!-- Skills Assessment -->
+      <div class="card">
+        <h2 class="card-title">
+          <span class="icon">📊</span> Skills Assessment
+        </h2>
+        <div class="radar-chart-container">
+          <canvas id="radar-chart"></canvas>
+        </div>
+        <!-- <div class="section">
+          <h3>Must-Have Skills</h3>
+          <div id="must-have-skills" class="skills-container"></div>
+        </div>
+        <div class="section">
+          <h3>Good-to-Have Skills</h3>
+          <div id="good-to-have-skills" class="skills-container"></div>
+        </div> -->
+      </div>
+
+      <!-- Education & Experience -->
+      <div class="card">
+        <h2 class="card-title">
+          <span class="icon">🎓</span> Education & Experience
+        </h2>
+        <div class="section">
+          <h3>Education</h3>
+          <p id="education"></p>
+          <div class="mini-score">
+            <span>Match Score:</span>
+            <div class="score-bar-container small">
+              <div id="education-match" class="score-bar"></div>
+              <span id="education-match-score" class="score-value"></span>
+            </div>
+          </div>
+          <div class="collapsible-content" id="education-reasoning">
+            <h4>Score Reasoning:</h4>
+            <p id="education-score-reasoning"></p>
+          </div>
+        </div>
+        <div class="section">
+          <h3>Experience</h3>
+          <p id="experience"></p>
+          <div class="mini-score">
+            <span>Relevance Score:</span>
+            <div class="score-bar-container small">
+              <div id="experience-match" class="score-bar"></div>
+              <span id="experience-match-score" class="score-value"></span>
+            </div>
+          </div>
+          <div class="collapsible-content" id="experience-reasoning">
+            <h4>Score Reasoning:</h4>
+            <p id="experience-score-reasoning"></p>
+          </div>
+        </div>
+        <div class="section">
+          <h3>Keyword Match</h3>
+          <div class="score-bar-container">
+            <div id="keyword-match" class="score-bar"></div>
+            <span id="keyword-match-score" class="score-value"></span>
+          </div>
+          <div class="collapsible-content" id="keyword-reasoning">
+            <h4>Match Analysis:</h4>
+            <p id="keyword-match-reasoning"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skill Gaps & Concerns -->
+      <div class="card">
+        <h2 class="card-title">
+          <span class="icon">⚠️</span> Skill Gaps & Concerns
+        </h2>
+        <div class="section">
+          <h3>Skill Gaps</h3>
+          <ul id="skill-gaps" class="list"></ul>
+        </div>
+        <div class="section">
+          <h3>Bias Indicators</h3>
+          <div id="bias-indicators-container"></div>
+        </div>
+        <div class="section">
+          <h3>Accommodations Needed</h3>
+          <p id="accommodations"></p>
+        </div>
+        <div class="section">
+          <h3>Diversity Initiative Alignment</h3>
+          <p id="diversity"></p>
+        </div>
+      </div>
+
+      <!-- Interview Recommendations -->
+      <div class="card wide">
+        <h2 class="card-title">
+          <span class="icon">📋</span> Interview Recommendations
+        </h2>
+        <div class="section">
+          <h3>Decision Reasoning</h3>
+          <p id="decision-reasoning"></p>
+        </div>
+        <div class="two-columns mt-1">
+          <div>
+            <h3>Priority Justification</h3>
+            <p id="priority-justification"></p>
+            
+            <h3 class="mt-1">Additional Preparation</h3>
+            <ul id="additional-preparation" class="list"></ul>
+          </div>
+          <div>
+            <h3>Recommended Interviewers</h3>
+            <div id="interviewers" class="interviewers"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screening Questions -->
+    <div class="card mt">
+      <h2 class="card-title">
+        <span class="icon">❓</span> Recommended Screening Questions
+      </h2>
+      <div id="screening-questions" class="questions"></div>
+    </div>
+
+    <footer>
+      <p>Candidate assessment generated on <span id="current-date"></span></p>
+    </footer>
+  </div>
+
+
+  <script>
+      var candidateData={{ candidate_data | tojson }};
+      console.log(candidateData)
+  </script>
+
+  <script src="static/js/screeningResults.js">
+  </script>
+  <!-- <script ></script> -->
+
+</body>
+</html>

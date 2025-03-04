@@ -1,47 +1,27 @@
+/* Base styles */
 body {
     font-family: Futura, "Trebuchet MS", Arial, sans-serif;
     line-height: 1.6;
     margin: 20px;
     background-color: #f4f7fa;
     color: #333;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
+/* Typography */
 h1, h2 {
     color: #333;
-}
-.header {
-    text-align: center;
-    margin-bottom: 20px; /* Add some space below the header */
-}
-
-#smallerheader{
-    font-size:22px; /* Add some space below the header */
-}
-
-
-
-section {
-    margin-bottom: 40px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
 }
 
 h3 {
     color: #444;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+#smallerheader {
+    font-size: 22px;
 }
 
-li {
-    margin-bottom: 10px;
-}
-
+/* Links */
 a {
     color: #007BFF;
     text-decoration: none;
@@ -51,17 +31,61 @@ a:hover {
     text-decoration: underline;
 }
 
-#concepts-revision, #swot-analysis, #required-skills, #qa-section, #company-insights {
-    margin-top: 20px;
+/* Layout - FIXED */
+.container {
+    width: 90%; /* Increased from 60% to give more space */
+    max-width: 1200px; /* Set a max-width for large screens */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column; /* Ensure vertical stacking */
 }
 
-/* Basic styling for collapsible sections */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%; /* Ensure full width */
+}
+
+section {
+    margin-bottom: 40px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    width: 100%; /* Ensure full width */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Lists */
+ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%; /* Ensure full width */
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+/* Section spacing */
+#concepts-revision, 
+#swot-analysis, 
+#required-skills, 
+#qa-section, 
+#company-insights {
+    margin-top: 20px;
+    width: 100%; /* Ensure full width */
+}
+
+/* Collapsible sections */
 .collapsible-section {
     margin: 20px 0;
-    border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    border: 1px solid #ccc;
+    width: 100%; /* Ensure full width */
 }
 
 .collapsible-header {
@@ -84,7 +108,6 @@ a:hover {
     font-size: 16px;
     cursor: pointer;
     margin-right: 10px;
-    transform: rotate(0deg);
     transition: transform 0.2s ease-in-out;
 }
 
@@ -95,26 +118,30 @@ a:hover {
 .collapsible-content {
     padding: 15px;
     display: none;
+    width: 100%; /* Ensure full width */
 }
 
-.container {
-align: center;
-width: 60%;
-margin: 0 auto; /* Center the container horizontally */
-}
-
-.buy-me-a-coffee  a {
+/* Support button */
+.buy-me-a-coffee {
     text-align: center;
+    margin: 20px 0;
+    width: 100%; /* Ensure full width */
+}
+
+.buy-me-a-coffee a {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
-    margin-bottom: 20px; /* Adds space below the button */
 }
 
 .buy-me-a-coffee img {
-    text-align: center;
-    width: 300px; /* Increase size of the button */
+    width: 300px;
     max-width: 100%;
+}
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
 }
