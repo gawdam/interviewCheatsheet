@@ -10,22 +10,20 @@ from werkzeug.utils import secure_filename
 import firebase_admin
 from firebase_admin import auth, credentials,storage
 from CRUD import (
-    get_resume,
     upload_resume,
     upload_job_description,
     upload_cheatsheet,
     get_cheatsheet,
 )
-import CRUD
-
-
-from functions.generate_interview_cheatsheet import generate_interview_cheatsheet
+from functions.candidate.generate_interview_cheatsheet import generate_interview_cheatsheet
+from functions.generate_jd_summary import generate_jd_summary
 
 
 
 # Initialize Flask app
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'supersecretkey')
+
 # Load environment variables
 load_dotenv()
 
@@ -170,31 +168,21 @@ def submit():
 def submitInterviewer():
     print("/submitInterviewer")
 
-    file = request.files.get('file')
     job_description = request.form.get('jobDescription', '').strip()
 
     if not job_description:
         flash('Job description is required.', 'error')
         return redirect('/')
 
-    if file and allowed_file(file.filename):
-        resume_filename = secure_filename(file.filename)
-        resume_path = os.path.join(TEMP_UPLOAD_FOLDER, resume_filename)
-        file.save(resume_path)
+    # Save job description to a temporary file
+    job_desc_path = os.path.join(TEMP_UPLOAD_FOLDER, "job_desc.txt")
+    with open(job_desc_path, "w", encoding="utf-8") as f:
+        f.write(job_description)
 
-        # Save job description to a temporary file
-        job_desc_path = os.path.join(TEMP_UPLOAD_FOLDER, "job_desc.txt")
-        with open(job_desc_path, "w", encoding="utf-8") as f:
-            f.write(job_description)
+    session['job_desc_path'] = job_desc_path
+    session['type'] = "interviewer"
 
-        session['resume_path'] = resume_path
-        session['job_desc_path'] = job_desc_path
-        session['type'] = "interviewer"
-
-        return redirect('/store')  # Redirect to store (which will now show the loading screen)
-
-    flash('Invalid file or no file uploaded.', 'error')
-    return redirect('/')
+    return redirect('/store')  # Redirect to store (which will now show the loading screen)
 
 
 
@@ -206,13 +194,13 @@ def store():
     if 'user_id' not in session:
         return redirect('/login')
 
-    user_id = session['user_id']
-    resume_path = session.get('resume_path')
-    job_description = session.get('job_desc_path')
+    # user_id = session['user_id']
+    # resume_path = session.get('resume_path')
+    # job_description = session.get('job_desc_path')
 
-    if not resume_path or not job_description:
-        flash("Missing data.", "error")
-        return redirect('/')
+    # if not resume_path or not job_description:
+    #     flash("Missing data.", "error")
+    #     return redirect('/')
 
     return render_template('loading.html', redirect_url='/process')
 
@@ -220,12 +208,31 @@ def store():
 def process():
     print("/process")
 
+
+
     if 'user_id' not in session:
         return redirect('/login')
+
+
 
     user_id = session['user_id']
     resume_path = session.get('resume_path')
     job_description_path = session.get('job_desc_path')
+
+    if session['type'] == "interviewer":
+        if job_description_path and os.path.exists(job_description_path):
+            with open(job_description_path, "r", encoding="utf-8") as f:
+                job_description = f.read()
+            print(job_description)
+        job_desc_url = upload_job_description(job_description, user_id)
+
+        jd_summary = generate_jd_summary(job_description)
+        jd_summmary_URL = upload_cheatsheet(user_id, jd_summary)
+
+        session['job_desc_url'] = job_desc_url
+        session['jd_summmary_URL'] = jd_summmary_URL
+
+        return redirect('/job-dashboard')
 
     try:
         with open(resume_path, 'rb') as f:
@@ -239,21 +246,45 @@ def process():
         job_desc_url = upload_job_description(job_description, user_id)
 
         cheatsheet_text = generate_interview_cheatsheet(BytesIO(resume_data), job_description,type=session['type'])
-        cheatsheet_url = upload_cheatsheet(user_id, cheatsheet_text)
+        cheatsheet_URL = upload_cheatsheet(user_id, cheatsheet_text)
 
 
         session['resume_url'] = resume_url
         session['job_desc_url'] = job_desc_url
-        session['cheatsheet_URL'] = cheatsheet_url
+        session['cheatsheet_URL'] = cheatsheet_URL
 
     except Exception as e:
         flash(f"Error processing data: {e}", "error")
         return redirect('/')
     
-    if session['type'] == "interviewer":
-        return redirect('/screening-results')
+
 
     return redirect('/cheatsheet')
+
+@app.route('/job-dashboard')
+def job_dashboard():
+    user_id = session["user_id"]
+
+    job_desc_URL = get_cheatsheet(user_id)
+    if not job_desc_URL:
+        flash("No cheatsheet available.", "error")
+        return redirect('/')
+    job_description_text = None
+    if job_desc_URL:
+        try:
+            response = requests.get(job_desc_URL)
+            if response.status_code == 200:
+                job_description_text = response.text
+            else:
+                flash("Failed to retrieve cheatsheet.", "error")
+        except Exception as e:
+            flash(f"Error retrieving cheatsheet: {str(e)}", "error")
+    print(f"Cheatsheet text: {job_desc_URL}")
+
+    job_desc_json = json.loads(job_description_text)
+
+    # Your cheatsheet_data is already in your Flask app
+    return render_template('jobDashboard.html', job_data=job_desc_json)
 
 @app.route('/screening-results')
 def screening_results():

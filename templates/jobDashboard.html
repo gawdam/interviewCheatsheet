@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="static/css/jobDashboard.css">
+
+</head>
+<body>
+    <button id="downloadPdf" class="download-btn">Download PDF</button>
+    <div id="jobContent" class="container">
+        <!-- Content will be dynamically inserted here -->
+    </div>
+    <script>
+      var jobData={{ job_data | tojson }};
+      console.log(jobData)
+    </script>
+
+    <script type="module" src="static/js/jobDashboard.js"></script>
+</body>
+</html>

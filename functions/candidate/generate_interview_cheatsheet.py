@@ -1,12 +1,10 @@
 import os
 import json
-from functions.pdf_to_text import extract_text_from_pdf
+from functions.candidate.pdf_to_text import extract_text_from_pdf
 from functions.response_format import  candidate_schema,interviewer_schema
-from functions.get_yt_videos import replace_youtube_videos_with_links
+from functions.candidate.get_yt_videos import replace_youtube_videos_with_links
 from dotenv import load_dotenv
 from google import genai
-
-import sys
 
 
 def generate_interview_cheatsheet(resume, job_description,type="candidate"):

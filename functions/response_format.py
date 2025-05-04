@@ -424,3 +424,149 @@ response_format_interviewer = {
     "strict": True,
     "schema":interviewer_schema
 }
+
+
+
+jd_summary_schema = {
+  "type": "object",
+  "properties": {
+    "job_metadata": {
+      "type": "object",
+      "description": "Essential job information",
+      "properties": {
+        "job_name": {"type": "string", "description": "Title of the position"},
+        "company_name": {"type": "string", "description": "Name of the hiring company"},
+        "location": {"type": "string"},
+        "employment_type": {
+          "type": "string",
+          "enum": ["full_time", "part_time", "contract", "internship"]
+        },
+        "seniority_level": {
+          "type": "string",
+          "enum": ["entry", "mid_level", "senior", "executive"]
+        }
+      },
+      "required": ["job_name", "company_name"]
+    },
+    "compensation": {
+      "type": "object",
+      "properties": {
+        "salary_range": {
+          "type": "object",
+          "properties": {
+            "min": {"type": "number"},
+            "max": {"type": "number"},
+            "currency": {"type": "string"}
+          }
+        },
+        "benefits": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "job_requirements": {
+      "type": "object",
+      "description": "Key requirements for the position",
+      "properties": {
+        "must_have_skills": {
+          "type": "array",
+          "description": "Essential skills for the role",
+          "items": {
+            "type": "object",
+            "properties": {
+              "skill_name": {"type": "string"},
+              "years_experience_required": {"type": "number"}
+            },
+            "required": ["skill_name"]
+          }
+        },
+        "good_to_have_skills": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "education": {
+          "type": "object",
+          "properties": {
+            "minimum_level": {
+              "type": "string",
+              "enum": ["high_school", "bachelor", "master", "phd"]
+            },
+            "preferred_fields": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "experience": {
+          "type": "object",
+          "properties": {
+            "minimum_years": {"type": "number"},
+            "preferred_years": {"type": "number"}
+          },
+          "required": ["minimum_years"]
+        }
+      },
+      "required": ["must_have_skills", "experience"]
+    },
+    "job_responsibilities": {
+      "type": "object",
+      "description": "Primary duties of the role",
+      "properties": {
+        "primary_duties": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "management_responsibilities": {
+          "type": "object",
+          "properties": {
+            "has_direct_reports": {"type": "boolean"},
+            "team_size": {"type": "number"}
+          }
+        }
+      },
+      "required": ["primary_duties"]
+    },
+    "company_profile": {
+      "type": "object",
+      "properties": {
+        "industry": {"type": "string"},
+        "company_size": {
+          "type": "string",
+          "enum": ["small", "medium", "large", "enterprise"]
+        }
+      }
+    },
+    "keywords": {
+      "type": "array",
+      "description": "Essential keywords from the job description",
+      "items": {
+        "type": "object",
+        "properties": {
+          "term": {"type": "string"},
+          "importance": {
+            "type": "string",
+            "enum": ["critical", "high", "medium", "low"]
+          }
+        },
+        "required": ["term"]
+      }
+    },
+    "job_summary": {
+      "type": "string",
+      "description": "Concise summary of the key aspects of the job"
+    }
+  },
+  "required": [
+    "job_metadata",
+    "job_requirements",
+    "job_responsibilities",
+    "keywords",
+    "job_summary"
+  ]
+}
+
+response_format_jd_summary = {
+
+    "name": "interview_cheatsheet",
+    "description": "Generates a cheatsheet for a job role",
+    "strict": True,
+    "schema":jd_summary_schema
+}

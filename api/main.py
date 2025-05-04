@@ -1,11 +1,8 @@
 from io import BytesIO
-from flask import Flask, render_template, request, redirect, url_for, flash
-from werkzeug.utils import secure_filename
+from flask import Flask, render_template, request, redirect, flash
 import os
-from werkzeug.middleware.dispatcher import DispatcherMiddleware
-from werkzeug.wrappers import Request, Response
 
-from functions.generate_interview_cheatsheet import generate_interview_cheatsheet
+from functions.candidate.generate_interview_cheatsheet import generate_interview_cheatsheet
 
 # Initialize the Flask app
 app = Flask(__name__)

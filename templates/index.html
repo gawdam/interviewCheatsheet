@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InterviewPrepz</title>
+    <title>HireUP</title>
     <link rel="stylesheet" href="static/css/index.css">
 </head>
 <!-- Google tag (gtag.js) -->
@@ -17,125 +18,164 @@
   gtag('config', 'G-YLJMPJKPT6');
 </script>
 <body>
-    <div style="display: flex; align-items: center;">
-        <h1 style="margin-right: 10px;">InterviewPrepz.com</h1>
-        <img src="static/logo.png" alt="Logo" style="height: 3em;">
-    </div>
 
-    {% if user_name %}
-    <!-- Drawer Trigger -->
-    <button class="drawer-trigger" id="drawerTrigger">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-    </button>
 
-    <!-- Drawer Backdrop -->
-    <div class="drawer-backdrop" id="drawerBackdrop"></div>
-
-    <!-- Drawer -->
-    <div class="drawer" id="drawer">
-        <button class="close-drawer" id="closeDrawer">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
-        
-        <div class="drawer-header">
-            <p class="username">Welcome, {{ user_name }}</p>
-        </div>
-
-        <div class="drawer-content">
-            <p>Curious about the product and upcoming features?</p>
-            <a href="https://discord.gg/yS86Bvdc" class="discord-button" target="_blank">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-                </svg>
-                Join our Discord community
+    <header class="main-header">
+        <div class="logo-container">
+            <a href="/" class="logo">
+            <h3 style="margin-right: 10px;">InterviewPrepz</h3>
+            <img src="static/logo.png" alt="Logo" style="height: 2em;">
             </a>
         </div>
 
-        <div class="drawer-footer">
-            <a href="/logout" class="logout-button">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                    <polyline points="16 17 21 12 16 7"></polyline>
-                    <line x1="21" y1="12" x2="9" y2="12"></line>
-                </svg>
-                Logout
-            </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#how-it-works">How it works</a></li>
+                <li><a href="#features">Features</a></li>
+
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+
         </div>
-    </div>
-    {% else %}
-    <div class="login-container">
-        <a href="/login" class="login-button">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                <polyline points="10 17 15 12 10 7"></polyline>
-                <line x1="15" y1="12" x2="3" y2="12"></line>
-            </svg>
-            Login
-        </a>
-    </div>
-    {% endif %}
+    </header>
 
-    <!-- Description of Interview Cheatsheet -->
-    <div class="description">
-        <p>
-            Add your resume, job description <br>
-            Let the <strong>AI</strong> sprinkle in some magic <br>
-            And voila - you get a cheatsheet to prepare for your next interview
-        </p>
+    <div class="section-divider"></div>
 
-    </div>
-
-    <div class="mode-toggle-container">
-        <span class="mode-label candidate-label active">Candidate</span>
-        <label class="switch">
-          <input type="checkbox" id="modeToggle">
-          <span class="slider round"></span>
-        </label>
-        <span class="mode-label interviewer-label">Interviewer</span>
-      </div>
-
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="flash-message">
-                <p>{{ messages[0] }}</p>
-            </div>
-        {% endif %}
-    {% endwith %}
-
-    <div class="container">
-        <div class="upload-section">
-            <div class="upload-box"
-                 onclick="handleBoxClick()"
-                 ondragover="handleDragOver(event)"
-                 ondragleave="handleDragLeave()"
-                 ondrop="handleDrop(event)">
-                <img src="static/images/upload.png" alt="Upload Icon">
-                <p>Upload Resume</p>
-                <div class="pdf-instruction">
-                    <p>Only PDF format allowed. </p>
+    <!-- Hero Section with full-width gradient -->
+    <section class="hero-section">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="fade-in">Transform your organizational recruitment process</h1>
+                    <p class="subtitle fade-in delay-1">Go from job requisition to interview stage in days</p>
                 </div>
-                <iframe id="pdf-preview" class="preview-hidden"></iframe>
+
+                <div class="hero-controls">
+                    <!-- Mode toggle moved above the form -->
+                    <div class="mode-toggle-container">
+                        <span class="mode-label candidate-label active">Interviewer</span>
+                        <label class="switch">
+                            <input type="checkbox" id="modeToggle">
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="mode-label interviewer-label">Candidate</span>
+                    </div>
+
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <div class="flash-message">
+                                <p>{{ messages[0] }}</p>
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+
+                    <div class="upload-section" id="upload-section" style="display: none">
+                        <div class="upload-box"
+                            onclick="handleBoxClick()"
+                            ondragover="handleDragOver(event)"
+                            ondragleave="handleDragLeave()"
+                            ondrop="handleDrop(event)">
+                            <img src="static/images/upload.png" alt="Upload Icon">
+                            <p>Upload Resume</p>
+                            <div class="pdf-instruction">
+                                <p>Only PDF format allowed. </p>
+                            </div>
+                            <iframe id="pdf-preview" class="preview-hidden"></iframe>
+                        </div>
+                    </div>
+
+                    <!-- Form now contains both the file input and job description textarea -->
+                    <form action="/submitInterviewer" method="POST" enctype="multipart/form-data" id="upload-form">
+                        <textarea id="jobDescription" name="jobDescription" placeholder="Paste the job description here"></textarea>
+                        <input id="file-input" class="hidden-input" type="file" name="file" accept="application/pdf" onchange="handleFileInput(event)">
+                        <button type="submit" id="submit-button" class="original-button">Find your best candidate</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <h2 class="section-title" id="how-it-works">How It Works</h2>
+    <section class="how-it-works">
+        <div class="container">
+            <div class="process-steps">
+                <div class="process-step slide-in-left">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <img src="static/images/howitworks_analysis.png" alt="Job Analysis" />
+                    </div>
+                    <h3>Add job description</h3>
+                    <p>Our AI analyzes job descriptions to extract key skills, requirements, and keywords.</p>
+                </div>
+                <div class="process-step slide-in-left delay-1">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <img src="static/images/howitworks_upload.png" alt="Resume Upload" />
+                    </div>
+                    <h3>Upload Resumes</h3>
+                    <p>Submit candidate resumes to be analyzed against the job requirements.</p>
+                </div>
+                <div class="process-step slide-in-left delay-2">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <img src="static/images/howitworks_insights.png" alt="Candidate Match" />
+                    </div>
+                    <h3>Get Candidate Insights</h3>
+                    <p>Receive detailed candidate summaries aligned with job requirements.</p>
+                </div>
+                <div class="process-step slide-in-left delay-3">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">
+                        <img src="static/images/howitworks_verify.png" alt="Interview Prep" />
+                    </div>
+                    <h3>Phone screening</h3>
+                    <p>Verify candidates resume with technical questions provided in summary report</p>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <br>
+    <div class="section-divider"></div>
 
-    <!-- Form now contains both the file input and job description textarea -->
-    <form action="/submit" method="POST" enctype="multipart/form-data" id="upload-form">
-        
-        <textarea id="jobDescription" name="jobDescription" placeholder="Paste the job description here"></textarea>
-        <input id="file-input" class="hidden-input" type="file" name="file" accept="application/pdf" onchange="handleFileInput(event)">
-        <br>
-        <button type="submit" id="submit-button" class="original-button">Generate your interview cheatsheet</button>
-    </form>
+    <h2 class="section-title" id="features">Key Features</h2>
+    <section class="features">
+        <div class="container">
+            <div class="feature-grid">
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <img src="static/images/features_security.png" alt="Data Security" />
+                    </div>
+                    <h3>Enterprise-Grade Security</h3>
+                    <p>Your data is encrypted and secure. We comply with industry standards and regulations for data protection.</p>
+                </div>
+                <div class="feature-card fade-in-up delay-1">
+                    <div class="feature-icon">
+                        <img src="static/images/features_speed.png" alt="Recruitment Speed" />
+                    </div>
+                    <h3>Accelerated Recruitment</h3>
+                    <p>Reduce time-to-hire by up to 60% with automated screening and matching of candidates.</p>
+                </div>
+                <div class="feature-card fade-in-up delay-2">
+                    <div class="feature-icon">
+                        <img src="static/images/features_quality.png" alt="Recruitment Quality" />
+                    </div>
+                    <h3>Higher Quality Hires</h3>
+                    <p>Identify the best candidates with AI-powered skills matching and qualification verification.</p>
+                </div>
+                <div class="feature-card fade-in-up delay-3">
+                    <div class="feature-icon">
+                        <img src="static/images/features_interview.png" alt="Technical Conversations" />
+                    </div>
+                    <h3>Better recruitment experience</h3>
+                    <p>Improves recruitment experience for both hiring managers and candidates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Loading screen -->
     <div id="loading-screen" class="loading-screen">
